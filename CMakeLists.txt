@@ -76,11 +76,10 @@ add_executable(uls1
         libmx/src/mx_strtrim.c
         libmx/src/mx_swap_char.c
         src/main.c
-        src/mx_asc_sorting.c
         src/mx_constructor.c
         src/mx_create_node_dir.c
         src/mx_delete_list_dir.c
-        src/mx_desc_sorting.c
+        src/mx_sortbytmod.c
         src/mx_get_digits.c
         src/mx_get_file_type.c
         src/mx_get_flags.c

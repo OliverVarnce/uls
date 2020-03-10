@@ -97,19 +97,19 @@ void mx_print_G_flag(char *name, mode_t value);
 void mx_print_flag_1(t_list_dir *head, t_flags *opts);
 int mx_constructor(t_list_dir *file_list, t_list_dir *dir_list, t_flags flag,
 int files_cnt);
-void mx_directory_walker(char *path, t_flags *opts, bool print_header,
+void mx_dir_parser(char *path, t_flags *opts, bool print_header,
 int *is_err);
 t_list_dir *mx_make_dir_list(char *path, t_list_dir *list,
 t_flags *opts, int *error_no);
 void mx_print_dir_list(char *dir_name, t_list_dir *list, t_flags *opts,
 bool print_header);
 t_flags *mx_get_flags(t_flags *fl, char *flags);
-void mx_cmp_lex_desc(t_list_dir *first, t_list_dir *second, t_flags *opts);
-void mx_cmp_size_desc(t_list_dir *first, t_list_dir *second, t_flags *opts);
-void mx_cmp_t_mod_desc(t_list_dir *first, t_list_dir *second, t_flags *opts);
-void mx_cmp_lex_asc(t_list_dir *first, t_list_dir *second, t_flags *opts);
-void mx_cmp_size_asc(t_list_dir *first, t_list_dir *second, t_flags *opts);
-void mx_cmp_t_mod_asc(t_list_dir *first, t_list_dir *second, t_flags *opts);
+void mx_sortbylexic_desc(t_list_dir *first, t_list_dir *second, t_flags *opts);
+void mx_sortbysize_desc(t_list_dir *first, t_list_dir *second, t_flags *opts);
+void mx_sortbytmod_desc(t_list_dir *first, t_list_dir *second, t_flags *opts);
+void mx_sortbylexic_asc(t_list_dir *first, t_list_dir *second, t_flags *opts);
+void mx_sortbysize_asc(t_list_dir *first, t_list_dir *second, t_flags *opts);
+void mx_sortbytmod_asc(t_list_dir *first, t_list_dir *second, t_flags *opts);
 void mx_swap(t_list_dir *first, t_list_dir *second);
 struct timespec mx_get_time_type(t_list_dir *node, t_flags *opts);
 int mx_get_digits(int num);

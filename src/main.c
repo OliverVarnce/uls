@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
     first_file_pos = read_arg(argc, argv, &flag);
     check_arg(argc, argv, first_file_pos, &is_err);
     if (first_file_pos == argc) {
-        mx_directory_walker(".", &flag, false, &is_err);
+        mx_dir_parser(".", &flag, false, &is_err);
         return is_err;
     }
     for (int i = first_file_pos; i < argc; i++)

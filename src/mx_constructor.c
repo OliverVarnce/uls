@@ -14,11 +14,11 @@ t_list_dir *dir_list, t_flags flag, int files_cnt) {
     print_selector(file_list, flag);
     for (t_list_dir *w = dir_list; w != NULL; w = w->next) {
         if (dir_list->next == NULL && file_list == NULL && files_cnt == 1)
-            mx_directory_walker(w->path, &flag, false, &is_err);
+            mx_dir_parser(w->path, &flag, false, &is_err);
         else {
             if (w != dir_list || file_list != NULL)
                 mx_printchar('\n');
-            mx_directory_walker(w->path, &flag, true, &is_err);
+            mx_dir_parser(w->path, &flag, true, &is_err);
         }
     }
     mx_delete_list_dir(&file_list);
@@ -35,7 +35,7 @@ static void print_selector(t_list_dir *file_list, t_flags flag){
         mx_print_table(file_list, &flag);
 }
 
-void mx_directory_walker(char *path, t_flags *opts, bool print_header,
+void mx_dir_parser(char *path, t_flags *opts, bool print_header,
 int *is_err) {
     t_list_dir *list = NULL;
     int error_no = -1;
@@ -51,7 +51,7 @@ int *is_err) {
             && !(mx_strcmp(w->d_name, ".") == 0 
             || mx_strcmp(w->d_name, "..") == 0)) {
                 mx_printchar('\n');
-                mx_directory_walker(w->path, opts, true, is_err);
+                mx_dir_parser(w->path, opts, true, is_err);
             }
         }
     }

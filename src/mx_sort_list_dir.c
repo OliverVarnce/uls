@@ -19,17 +19,17 @@ t_list_dir *mx_sort_list_dir(t_list_dir *lst, t_flags *opts) {
 static fptr factory(t_flags *opts) {
     if (opts->using_r) {
         if (opts->using_S)
-            return mx_cmp_size_desc;
+            return mx_sortbysize_desc;
         if (opts->using_t)
-            return mx_cmp_t_mod_desc;
-        return mx_cmp_lex_desc;
+            return mx_sortbytmod_desc;
+        return mx_sortbylexic_desc;
     } 
     else {
         if (opts->using_S)
-            return mx_cmp_size_asc;
+            return mx_sortbysize_asc;
         if (opts->using_t)
-            return mx_cmp_t_mod_asc;
-        return mx_cmp_lex_asc;
+            return mx_sortbytmod_asc;
+        return mx_sortbylexic_asc;
     }
 }
 
