@@ -23,7 +23,7 @@ SRC = mx_create_node_dir \
 	mx_get_digits \
 	mx_print_name_or_link \
 	mx_other \
-	mx_uls \
+	main \
 	mx_make_table \
 
 SRCS = $(addsuffix .c, $(SRC))
