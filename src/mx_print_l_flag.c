@@ -6,12 +6,12 @@ static void init_cur_info(t_col_size *buf, t_list_dir *w, t_flags *fl) {
     buf->cur_col_three_size = 0;
     buf->cur_col_four_size = 0;
     buf->cur_col_one_size = mx_get_nums(w->statbuf->st_nlink);
-    if(!fl->using_n)
+    if(!fl->flag_n)
         buf->cur_col_two_size = (buf->pw != NULL
                                  ? mx_strlen(buf->pw->pw_name) + 1 : 0);
     else
         buf->cur_col_two_size = mx_get_nums(w->statbuf->st_uid) + 1;
-    if(fl->using_n)
+    if(fl->flag_n)
         buf->cur_col_three_size = mx_get_nums(w->statbuf->st_gid);
     else
         buf->cur_col_three_size = (buf->gr != NULL ? mx_strlen(buf->gr->gr_name)

@@ -17,17 +17,17 @@ t_list_dir *mx_sort_list_dir(t_list_dir *lst, t_flags *opts) {
 }
 
 static fptr factory(t_flags *opts) {
-    if (opts->using_r) {
-        if (opts->using_S)
+    if (opts->flag_r) {
+        if (opts->flag_S)
             return mx_sortbysize_desc;
-        if (opts->using_t)
+        if (opts->flag_t)
             return mx_sortbytmod_desc;
         return mx_sortbylexic_desc;
     } 
     else {
-        if (opts->using_S)
+        if (opts->flag_S)
             return mx_sortbysize_asc;
-        if (opts->using_t)
+        if (opts->flag_t)
             return mx_sortbytmod_asc;
         return mx_sortbylexic_asc;
     }
@@ -47,9 +47,9 @@ void mx_swap(t_list_dir *first, t_list_dir *second) {
 }
 
 struct timespec mx_get_time_type(t_list_dir *node, t_flags *opts) {
-    if (opts->using_u)
+    if (opts->flag_u)
         return node->statbuf->st_atimespec;
-    if (opts->using_c)
+    if (opts->flag_c)
         return node->statbuf->st_ctimespec;
     return node->statbuf->st_mtimespec;
 }

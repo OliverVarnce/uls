@@ -16,7 +16,7 @@ void mx_print_table(t_list_dir *head, t_flags *opts) {
         return;
     ioctl(0, TIOCGWINSZ, &w);
     
-    col_width = (opts->using_G ? col_width + 1 
+    col_width = (opts->flag_G ? col_width + 1
     : col_width + 8 - col_width % 8);
 
     get_rc_num(elements, (isatty(STDOUT_FILENO) ? w.ws_col : static_win_size),

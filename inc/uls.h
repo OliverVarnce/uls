@@ -40,21 +40,21 @@ typedef struct s_list_dir {
 } t_list_dir;
 
 typedef struct s_flags {
-    bool using_l;
-    bool using_C;
-    bool using_1;
-    bool using_a;
-    bool using_A;
-    bool using_G;
-    bool using_r;
-    bool using_R;
-    bool using_T;
-    bool using_n;
-    bool using_g;
-    bool using_u;
-    bool using_c;
-    bool using_S;
-    bool using_t;
+    bool flag_l;
+    bool flag_C;
+    bool flag_1;
+    bool flag_a;
+    bool flag_A;
+    bool flag_G;
+    bool flag_r;
+    bool flag_R;
+    bool flag_T;
+    bool flag_n;
+    bool flag_g;
+    bool flag_u;
+    bool flag_c;
+    bool flag_S;
+    bool flag_t;
 }t_flags;
 
 typedef struct s_column_size {

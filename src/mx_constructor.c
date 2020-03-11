@@ -11,8 +11,8 @@ static t_list_dir *make_dir_list(char *path, t_list_dir *list,
         return NULL;
     }
     while ((entry = readdir(dir)) != NULL)
-        if (!(!opts->using_a && entry->d_name[0] == '.')
-            || (opts->using_A && !(mx_strcmp(entry->d_name, ".") == 0
+        if (!(!opts->flag_a && entry->d_name[0] == '.')
+            || (opts->flag_A && !(mx_strcmp(entry->d_name, ".") == 0
                                    || mx_strcmp(entry->d_name, "..") == 0)))
             mx_push_back_dir(&list, entry->d_name, path);
     closedir(dir);
@@ -21,18 +21,18 @@ static t_list_dir *make_dir_list(char *path, t_list_dir *list,
 }
 
 static void print_dir_list(t_list_dir *list, t_flags *opts) {
-    if (opts->using_l && list)
+    if (opts->flag_l && list)
         mx_print_l_flag(list, opts, true);
-    else if (opts->using_1 || (!isatty(STDOUT_FILENO) && !opts->using_C))
+    else if (opts->flag_1 || (!isatty(STDOUT_FILENO) && !opts->flag_C))
         mx_print_flag_1(list, opts);
     else
         mx_print_table(list, opts);
 }
 
 static void print_selector(t_list_dir *file_list, t_flags flag){
-    if (flag.using_l)
+    if (flag.flag_l)
         mx_print_l_flag(file_list, &flag, false);
-    else if (flag.using_1 || (!isatty(STDOUT_FILENO) && !flag.using_C))
+    else if (flag.flag_1 || (!isatty(STDOUT_FILENO) && !flag.flag_C))
         mx_print_flag_1(file_list, &flag);
     else
         mx_print_table(file_list, &flag);
@@ -69,7 +69,7 @@ int *is_err) {
         *is_err = 1;
     mx_printerror(path, error_no, print_header);
     print_dir_list(list, opts);
-    if (opts->using_R) {
+    if (opts->flag_R) {
         for (t_list_dir *w = list; w != NULL; w = w->next) {
             if (mx_get_file_type(w->statbuf->st_mode) == 'd'
             && !(mx_strcmp(w->d_name, ".") == 0

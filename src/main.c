@@ -34,7 +34,7 @@ t_flags *fl){
 
     if (lstat(argv, &statbuf) != -1) {
         if (mx_get_file_type(statbuf.st_mode) == 'd'
-        || (mx_get_file_type(statbuf.st_mode) == 'l' && !fl->using_l))
+        || (mx_get_file_type(statbuf.st_mode) == 'l' && !fl->flag_l))
             mx_push_front_dir(d_list, argv, NULL);
         else 
             mx_push_back_dir(f_list, argv, NULL);
@@ -42,21 +42,21 @@ t_flags *fl){
 }
 
 static void init_opts(t_flags *opts) {
-    opts->using_l = false;
-    opts->using_C = true;
-    opts->using_1 = false;
-    opts->using_a = false;
-    opts->using_A = false;
-    opts->using_G = false;
-    opts->using_r = false;
-    opts->using_R = false;
-    opts->using_T = false;
-    opts->using_n = false;
-    opts->using_g = false;
-    opts->using_u = false;
-    opts->using_c = false;
-    opts->using_S = false;
-    opts->using_t = false;
+    opts->flag_l = false;
+    opts->flag_C = true;
+    opts->flag_1 = false;
+    opts->flag_a = false;
+    opts->flag_A = false;
+    opts->flag_G = false;
+    opts->flag_r = false;
+    opts->flag_R = false;
+    opts->flag_T = false;
+    opts->flag_n = false;
+    opts->flag_g = false;
+    opts->flag_u = false;
+    opts->flag_c = false;
+    opts->flag_S = false;
+    opts->flag_t = false;
 }
 
 static void check_arg(int argc, char *argv[], int i, int *is_error) {
@@ -79,8 +79,8 @@ static int read_arg(int argc, char *argv[], t_flags *fl) {
     int pos = 1;
     
     if(!isatty(STDOUT_FILENO)) {
-        fl->using_C = false;
-        fl->using_1 = true;
+        fl->flag_C = false;
+        fl->flag_1 = true;
     }
     for(int k = 1; k < argc; k++){
         if(*argv[k] == '-' && mx_strlen(argv[k]) != 1){

@@ -29,9 +29,9 @@ void mx_print_size_and_time(t_list_dir *w, t_flags *fl, t_col_size info) {
 }
 
 static char *get_time(t_list_dir *w, t_flags *fl) {
-    if(fl->using_u)
+    if(fl->flag_u)
         return short_time(&w->statbuf->st_atime, fl);
-    else if(fl->using_c)
+    else if(fl->flag_c)
         return short_time(&w->statbuf->st_ctime, fl);
     else
         return short_time(&w->statbuf->st_mtime, fl);
@@ -40,7 +40,7 @@ static char *get_time(t_list_dir *w, t_flags *fl) {
 static char *short_time(time_t *t, t_flags *fl) {
     char *s;
 
-    if(fl->using_T){
+    if(fl->flag_T){
         s = mx_strndup((ctime)(t) + 4, 20);
     }
     else {
