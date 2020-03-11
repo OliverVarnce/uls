@@ -52,7 +52,7 @@ static t_col_size get_column_size(t_list_dir *lst, t_flags *fl) {
     return buf;
 }
 
-void mx_print_l_flag(t_list_dir *lst, t_flags *fl, bool pr_total) {
+void mx_out_l(t_list_dir *lst, t_flags *fl, bool pr_total) {
     t_col_size info = get_column_size(lst, fl);
 
     if (pr_total) {

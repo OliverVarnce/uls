@@ -3,8 +3,6 @@
 static void init_opts(t_flags *opts);
 static void check_arg(int argc, char *argv[], int i, int *is_error);
 static int read_arg(int argc, char *argv[], t_flags *fl);
-static void create_lists(char *argv, t_list_dir **f_list, t_list_dir **d_list,
-t_flags *fl);
 
 int main(int argc, char **argv) {
     t_flags flag;
@@ -21,24 +19,11 @@ int main(int argc, char **argv) {
         return is_err;
     }
     for (int i = first_file_pos; i < argc; i++)
-        create_lists(argv[i], &file_list, &dir_list, &flag);
+        mx_create_lists(argv[i], &file_list, &dir_list, &flag);
     file_list = mx_sort_list_dir(file_list, &flag);
     dir_list = mx_sort_list_dir(dir_list, &flag);
     is_err = mx_constructor(file_list, dir_list, flag, argc - first_file_pos);
     return is_err;
-}
-
-static void create_lists(char *argv, t_list_dir **f_list, t_list_dir **d_list,
-t_flags *fl){
-    struct stat statbuf;
-
-    if (lstat(argv, &statbuf) != -1) {
-        if (mx_get_file_type(statbuf.st_mode) == 'd'
-        || (mx_get_file_type(statbuf.st_mode) == 'l' && !fl->flag_l))
-            mx_push_front_dir(d_list, argv, NULL);
-        else 
-            mx_push_back_dir(f_list, argv, NULL);
-    }
 }
 
 static void init_opts(t_flags *opts) {

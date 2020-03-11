@@ -49,7 +49,7 @@ t_flags *opts) {
         for (int j = 0; j < table.cols; j++)
             if (arr[i][j].ptr != NULL) {
                 opts->flag_G ?
-                mx_print_G_flag(arr[i][j].ptr->d_name, 
+                mx_out_G(arr[i][j].ptr->d_name,
                 arr[i][j].ptr->statbuf->st_mode) : 
                 mx_printstr(arr[i][j].ptr->d_name);
                 if (j != table.cols - 1 

@@ -1,35 +1,38 @@
 cmake_minimum_required(VERSION 3.15)
-project(uls_new C)
+project(uls1 C)
 
 set(CMAKE_C_STANDARD 11)
 
-include_directories(.)
 include_directories(inc)
 include_directories(libmx)
 include_directories(libmx/inc)
 include_directories(libmx/src)
 include_directories(src)
 
-add_executable(uls_new
+add_executable(uls1
         inc/uls.h
         libmx/inc/libmx.h
+        libmx/src/mx_arrlen.c
         libmx/src/mx_atoi.c
         libmx/src/mx_binary_search.c
         libmx/src/mx_bubble_sort.c
+        libmx/src/mx_count_char.c
+        libmx/src/mx_count_digits.c
+        libmx/src/mx_count_letters.c
         libmx/src/mx_count_substr.c
         libmx/src/mx_count_words.c
         libmx/src/mx_create_node.c
         libmx/src/mx_del_extra_spaces.c
+        libmx/src/mx_del_list.c
         libmx/src/mx_del_strarr.c
-        libmx/src/mx_delete_list.c
         libmx/src/mx_file_to_str.c
         libmx/src/mx_foreach.c
         libmx/src/mx_get_char_index.c
         libmx/src/mx_get_substr_index.c
         libmx/src/mx_hex_to_nbr.c
-        libmx/src/mx_isalpha.c
+        libmx/src/mx_is_char.c
+        libmx/src/mx_is_space.c
         libmx/src/mx_isdigit.c
-        libmx/src/mx_isspace.c
         libmx/src/mx_itoa.c
         libmx/src/mx_list_size.c
         libmx/src/mx_memccpy.c
@@ -67,7 +70,6 @@ add_executable(uls_new
         libmx/src/mx_strjoin.c
         libmx/src/mx_strlen.c
         libmx/src/mx_strncat.c
-        libmx/src/mx_strncmp.c
         libmx/src/mx_strncpy.c
         libmx/src/mx_strndup.c
         libmx/src/mx_strnew.c
@@ -75,19 +77,20 @@ add_executable(uls_new
         libmx/src/mx_strstr.c
         libmx/src/mx_strtrim.c
         libmx/src/mx_swap_char.c
+        libmx/src/mx_swap_elem.c
         src/main.c
         src/mx_constructor.c
         src/mx_create_node_dir.c
         src/mx_delete_list_dir.c
-        src/mx_get_nums.c
         src/mx_get_file_type.c
         src/mx_get_flags.c
+        src/mx_get_nums.c
         src/mx_list_size_dir.c
         src/mx_make_table.c
         src/mx_other.c
-        src/mx_print_flag_1.c
-        src/mx_print_G_flag.c
-        src/mx_print_l_flag.c
+        src/mx_out_1.c
+        src/mx_out_G.c
+        src/mx_out_l.c
         src/mx_print_name_or_link.c
         src/mx_print_perm_and_link.c
         src/mx_print_size_and_time.c

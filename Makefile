@@ -9,10 +9,10 @@ SRC   = mx_create_node_dir \
 		mx_delete_list_dir \
 		mx_get_file_type \
 		mx_list_size_dir \
-		mx_print_flag_1 \
-		mx_print_G_flag \
+		mx_out_1 \
+		mx_out_G \
 		mx_print_table \
-		mx_print_l_flag \
+		mx_out_l \
 		mx_push_back_dir \
 		mx_push_front_dir \
 		mx_sort_list_dir \
@@ -26,6 +26,7 @@ SRC   = mx_create_node_dir \
 		mx_other \
 		main \
 		mx_make_table \
+		mx_create_lists
 
 SRCS = $(addsuffix .c, $(SRC))
 

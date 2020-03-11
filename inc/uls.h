@@ -85,16 +85,17 @@ typedef void (*fptr)(t_list_dir *first, t_list_dir *second, t_flags *opts);
 t_list_dir *mx_create_node_dir(const char *d_name, const char *path);
 void mx_push_front_dir(t_list_dir **list, const char *d_name,
 const char *path);
+void mx_create_lists(char *argv, t_list_dir **f_list, t_list_dir **d_list, t_flags *fl);
 void mx_push_back_dir(t_list_dir **list, const char *d_name, const char *path);
 int mx_list_size_dir(t_list_dir *list, int *max_len);
 void mx_delete_list_dir(t_list_dir **head);
 t_list_dir *mx_sort_list_dir(t_list_dir *lst, t_flags *opts);
 char mx_get_file_type(mode_t value);
 void mx_print_table(t_list_dir *head, t_flags *opts);
-void mx_print_l_flag(t_list_dir *lst, t_flags *fl, bool pr_total);
+void mx_out_l(t_list_dir *lst, t_flags *fl, bool pr_total);
 void mx_add_color(char *name, char *col);
-void mx_print_G_flag(char *name, mode_t value);
-void mx_print_flag_1(t_list_dir *head, t_flags *opts);
+void mx_out_G(char *name, mode_t value);
+void mx_out_1(t_list_dir *head, t_flags *opts);
 int mx_constructor(t_list_dir *file_list, t_list_dir *dir_list, t_flags flag,
 int files_cnt);
 void mx_dir_parser(char *path, t_flags *opts, bool print_header,

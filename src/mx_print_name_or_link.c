@@ -11,7 +11,7 @@ void mx_print_name_or_link(t_list_dir *w, t_flags *fl){
         free(link);
     } 
     else {
-        fl->flag_G ? mx_print_G_flag(w->d_name, w->statbuf->st_mode)
+        fl->flag_G ? mx_out_G(w->d_name, w->statbuf->st_mode)
         : mx_printstr(w->d_name);
     }
     mx_printchar('\n');

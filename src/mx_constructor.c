@@ -22,18 +22,18 @@ static t_list_dir *make_dir_list(char *path, t_list_dir *list,
 
 static void print_dir_list(t_list_dir *list, t_flags *opts) {
     if (opts->flag_l && list)
-        mx_print_l_flag(list, opts, true);
+        mx_out_l(list, opts, true);
     else if (opts->flag_1 || (!isatty(STDOUT_FILENO) && !opts->flag_C))
-        mx_print_flag_1(list, opts);
+        mx_out_1(list, opts);
     else
         mx_print_table(list, opts);
 }
 
 static void print_selector(t_list_dir *file_list, t_flags flag){
     if (flag.flag_l)
-        mx_print_l_flag(file_list, &flag, false);
+        mx_out_l(file_list, &flag, false);
     else if (flag.flag_1 || (!isatty(STDOUT_FILENO) && !flag.flag_C))
-        mx_print_flag_1(file_list, &flag);
+        mx_out_1(file_list, &flag);
     else
         mx_print_table(file_list, &flag);
 }

@@ -9,7 +9,7 @@ void mx_add_color(char *name, char *col){
     mx_printstr(MX_DEFAULT);
 }
 
-void mx_print_G_flag(char *name, mode_t value) {
+void mx_out_G(char *name, mode_t value) {
     switch (mx_get_file_type(value)) {
         case 'p': mx_add_color(name, MX_YELLOW);
             break;
