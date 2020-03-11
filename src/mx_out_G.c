@@ -34,22 +34,22 @@ void mx_add_color(char *name, char *col){
 }
 
 void mx_out_G(char *name, mode_t value) {
-    char color = mx_get_file_type(value)
-    if (color == 'p')
-        mx_add_color(name, YELLOW);
-    else if (color == 'c')
-        mx_add_color(name, YELLOW);
-    else if (color == 'd')
-        print_dir(name, value);
-    else if (color == 'b')
-        mx_add_color(name, AQUA_BLUE);
-    else if (color == '-')
-        print_reg(name, value);
-    else if (color == 'l')
-        mx_add_color(name, PINK);
-    else if (color == 's')
-        mx_add_color(name, GREEN);
-    mx_printstr(name);
-
+    switch (mx_get_file_type(value)) {
+        case 'p': mx_add_color(name, MX_YELLOW);
+            break;
+        case 'c': mx_add_color(name, MX_YELLOW_BLUE);
+            break;
+        case 'd': print_dir(name, value);
+            break;
+        case 'b': mx_add_color(name, MX_AQUA_BLUE);
+            break;
+        case '-': print_reg(name, value);
+            break;
+        case 'l': mx_add_color(name, MX_PINK);
+            break;
+        case 's': mx_add_color(name, MX_GREEN);
+            break;
+        default: mx_printstr(name);
+    }
 }
 
