@@ -58,17 +58,17 @@ typedef struct s_flags {
 }t_flags;
 
 typedef struct s_column_size {
-    int block1_msize;
-    int block2_msize;
-    int block3_msize;
-    int block4_msize;
+    int col_one_size;
+    int col_two_size;
+    int col_three_size;
+    int col_four_size;
     int total_size; 
     struct passwd *pw;
     struct group *gr;
-    int cur_block1_size;
-    int cur_block2_size;
-    int cur_block3_size;
-    int cur_block4_size;
+    int cur_col_one_size;
+    int cur_col_two_size;
+    int cur_col_three_size;
+    int cur_col_four_size;
 }t_col_size;
 
 typedef struct s_node {
