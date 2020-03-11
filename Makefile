@@ -21,7 +21,7 @@ SRC   = mx_create_node_dir \
 		mx_print_perm_and_link \
 		mx_print_size_and_time \
 		mx_print_uid_gid \
-		mx_get_digits \
+		mx_get_nums \
 		mx_print_name_or_link \
 		mx_other \
 		main \

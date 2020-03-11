@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(uls1 C)
+project(uls_new C)
 
 set(CMAKE_C_STANDARD 11)
 
@@ -10,7 +10,7 @@ include_directories(libmx/inc)
 include_directories(libmx/src)
 include_directories(src)
 
-add_executable(uls1
+add_executable(uls_new
         inc/uls.h
         libmx/inc/libmx.h
         libmx/src/mx_atoi.c
@@ -79,8 +79,7 @@ add_executable(uls1
         src/mx_constructor.c
         src/mx_create_node_dir.c
         src/mx_delete_list_dir.c
-        src/mx_sortbytmod.c
-        src/mx_get_digits.c
+        src/mx_get_nums.c
         src/mx_get_file_type.c
         src/mx_get_flags.c
         src/mx_list_size_dir.c
@@ -96,4 +95,7 @@ add_executable(uls1
         src/mx_print_uid_gid.c
         src/mx_push_back_dir.c
         src/mx_push_front_dir.c
-        src/mx_sort_list_dir.c)
+        src/mx_sort_list_dir.c
+        src/mx_sortbylexic.c
+        src/mx_sortbysize.c
+        src/mx_sortbytmod.c)

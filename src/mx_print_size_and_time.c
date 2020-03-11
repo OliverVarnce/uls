@@ -17,7 +17,7 @@ void mx_print_size_and_time(t_list_dir *w, t_flags *fl, t_col_size info) {
         free(temp);
     } 
     else {
-        for (int i = info.block4_msize - mx_get_digits(w->statbuf->st_size);
+        for (int i = info.block4_msize - mx_get_nums(w->statbuf->st_size);
          i >= 0; i--)
             mx_printchar(' ');
         mx_printint(w->statbuf->st_size);

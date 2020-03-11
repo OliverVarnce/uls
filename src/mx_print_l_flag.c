@@ -27,22 +27,22 @@ static void init_cur_info(t_col_size *buf, t_list_dir *w, t_flags *fl) {
     buf->cur_block2_size = 0;
     buf->cur_block3_size = 0;
     buf->cur_block4_size = 0;
-    buf->cur_block1_size = mx_get_digits(w->statbuf->st_nlink);
+    buf->cur_block1_size = mx_get_nums(w->statbuf->st_nlink);
     if(!fl->using_n)
         buf->cur_block2_size = (buf->pw != NULL 
         ? mx_strlen(buf->pw->pw_name) + 1 : 0);
     else
-        buf->cur_block2_size = mx_get_digits(w->statbuf->st_uid) + 1;
+        buf->cur_block2_size = mx_get_nums(w->statbuf->st_uid) + 1;
     if(fl->using_n)
-        buf->cur_block3_size = mx_get_digits(w->statbuf->st_gid);
+        buf->cur_block3_size = mx_get_nums(w->statbuf->st_gid);
     else            
         buf->cur_block3_size = (buf->gr != NULL ? mx_strlen(buf->gr->gr_name)
-        : mx_get_digits(w->statbuf->st_gid));
+        : mx_get_nums(w->statbuf->st_gid));
     if (mx_get_file_type(w->statbuf->st_mode) == 'c' 
         || mx_get_file_type(w->statbuf->st_mode) == 'b')
         buf->cur_block4_size = 8;
     else
-        buf->cur_block4_size = mx_get_digits(w->statbuf->st_size);
+        buf->cur_block4_size = mx_get_nums(w->statbuf->st_size);
 }
 
 static void init_start_info(t_col_size *buf) {

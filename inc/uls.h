@@ -112,7 +112,7 @@ void mx_sortbysize_asc(t_list_dir *first, t_list_dir *second, t_flags *opts);
 void mx_sortbytmod_asc(t_list_dir *first, t_list_dir *second, t_flags *opts);
 void mx_swap(t_list_dir *first, t_list_dir *second);
 struct timespec mx_get_time_type(t_list_dir *node, t_flags *opts);
-int mx_get_digits(int num);
+int mx_get_nums(int num);
 void mx_print_perm_and_link(t_list_dir *w, t_col_size info);
 void mx_print_size_and_time(t_list_dir *w, t_flags *fl, t_col_size info);
 void mx_print_uid_gid(t_list_dir *w, t_flags *fl, t_col_size info);
