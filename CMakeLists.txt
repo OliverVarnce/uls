@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_requiRED(VERSION 3.15)
 project(uls1 C)
 
 set(CMAKE_C_STANDARD 11)
