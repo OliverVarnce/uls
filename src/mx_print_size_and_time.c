@@ -8,19 +8,19 @@ static char *get_time(t_list_dir *w, t_flags *fl);
 void mx_print_size_and_time(t_list_dir *w, t_flags *fl, t_col_size info) {
     char *time_form = get_time(w, fl);
 
-    if (mx_get_file_type(w->statbuf->st_mode) == 'c' 
-        || mx_get_file_type(w->statbuf->st_mode) == 'b') {
-        char *temp = major_minor(w->statbuf->st_rdev);
+    if (mx_get_file_type(w->stattemp->st_mode) == 'c'
+        || mx_get_file_type(w->stattemp->st_mode) == 'b') {
+        char *temp = major_minor(w->stattemp->st_rdev);
 
         mx_printstr(temp);
         mx_printchar(' ');
         free(temp);
     } 
     else {
-        for (int i = info.col_four_size - mx_get_nums(w->statbuf->st_size);
+        for (int i = info.col_four_size - mx_get_nums(w->stattemp->st_size);
          i >= 0; i--)
             mx_printchar(' ');
-        mx_printint(w->statbuf->st_size);
+        mx_printint(w->stattemp->st_size);
         mx_printchar(' ');
     }
     mx_printstr(time_form);
@@ -30,11 +30,11 @@ void mx_print_size_and_time(t_list_dir *w, t_flags *fl, t_col_size info) {
 
 static char *get_time(t_list_dir *w, t_flags *fl) {
     if(fl->flag_u)
-        return short_time(&w->statbuf->st_atime, fl);
+        return short_time(&w->stattemp->st_atime, fl);
     else if(fl->flag_c)
-        return short_time(&w->statbuf->st_ctime, fl);
+        return short_time(&w->stattemp->st_ctime, fl);
     else
-        return short_time(&w->statbuf->st_mtime, fl);
+        return short_time(&w->stattemp->st_mtime, fl);
 }
 
 static char *short_time(time_t *t, t_flags *fl) {

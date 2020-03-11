@@ -50,7 +50,7 @@ t_flags *opts) {
             if (arr[i][j].ptr != NULL) {
                 opts->flag_G ?
                 mx_out_G(arr[i][j].ptr->d_name,
-                arr[i][j].ptr->statbuf->st_mode) : 
+                arr[i][j].ptr->stattemp->st_mode) :
                 mx_printstr(arr[i][j].ptr->d_name);
                 if (j != table.cols - 1 
                 && !(j == table.cols - 2 && arr[i][j+1].ptr == NULL)) {

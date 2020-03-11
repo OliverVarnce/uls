@@ -4,14 +4,14 @@ static void print_perm_type(mode_t value);
 static char return_acl(char *filename);
 
 void mx_print_perm_and_link(t_list_dir *w, t_col_size info) {
-    mx_printchar(mx_get_file_type(w->statbuf->st_mode));
-    print_perm_type(w->statbuf->st_mode);
+    mx_printchar(mx_get_file_type(w->stattemp->st_mode));
+    print_perm_type(w->stattemp->st_mode);
     mx_printchar(return_acl(w->path));
     mx_printchar(' ');
-    for (int i = info.col_one_size - mx_get_nums(w->statbuf->st_nlink);
+    for (int i = info.col_one_size - mx_get_nums(w->stattemp->st_nlink);
     i > 0; i--)
         mx_printchar(' ');
-    mx_printint(w->statbuf->st_nlink);
+    mx_printint(w->stattemp->st_nlink);
     mx_printchar(' ');
 }
 

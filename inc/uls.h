@@ -35,7 +35,7 @@
 typedef struct s_list_dir {
     char *d_name;
     char *path;
-    struct stat *statbuf;
+    struct stat *stattemp;
     struct s_list_dir *next;
 } t_list_dir;
 

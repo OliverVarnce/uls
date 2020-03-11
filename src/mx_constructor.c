@@ -71,7 +71,7 @@ int *is_err) {
     print_dir_list(list, opts);
     if (opts->flag_R) {
         for (t_list_dir *w = list; w != NULL; w = w->next) {
-            if (mx_get_file_type(w->statbuf->st_mode) == 'd'
+            if (mx_get_file_type(w->stattemp->st_mode) == 'd'
             && !(mx_strcmp(w->d_name, ".") == 0
             || mx_strcmp(w->d_name, "..") == 0)) {
                 mx_printchar('\n');

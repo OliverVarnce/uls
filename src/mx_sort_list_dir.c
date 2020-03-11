@@ -34,7 +34,7 @@ static fptr factory(t_flags *opts) {
 }
 
 void mx_swap(t_list_dir *first, t_list_dir *second) {
-    struct stat *temp_stat = first->statbuf;
+    struct stat *temp_stat = first->stattemp;
     char *temp_name = first->d_name;
     char *temp_path = first->path;
 
@@ -42,14 +42,14 @@ void mx_swap(t_list_dir *first, t_list_dir *second) {
     second->d_name = temp_name;
     first->path = second->path;
     second->path = temp_path;
-    first->statbuf = second->statbuf;
-    second->statbuf = temp_stat;
+    first->stattemp = second->stattemp;
+    second->stattemp = temp_stat;
 }
 
 struct timespec mx_get_time_type(t_list_dir *node, t_flags *opts) {
     if (opts->flag_u)
-        return node->statbuf->st_atimespec;
+        return node->stattemp->st_atimespec;
     if (opts->flag_c)
-        return node->statbuf->st_ctimespec;
-    return node->statbuf->st_mtimespec;
+        return node->stattemp->st_ctimespec;
+    return node->stattemp->st_mtimespec;
 }

@@ -14,8 +14,8 @@ t_list_dir *mx_create_node_dir(const char *d_name, const char *path) {
             path_w_slash = mx_strdup("/");
     }
     node->path = mx_strjoin(path_w_slash, d_name);
-    node->statbuf = (struct stat *)malloc(sizeof(struct stat));
-    lstat(node->path, node->statbuf);
+    node->stattemp = (struct stat *)malloc(sizeof(struct stat));
+    lstat(node->path, node->stattemp);
     node->next = NULL;
     free(path_w_slash);
     return node;

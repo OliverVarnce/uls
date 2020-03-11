@@ -9,7 +9,7 @@ void mx_delete_list_dir(t_list_dir **head) {
 
         free(temp->d_name);
         free(temp->path);
-        free(temp->statbuf);
+        free(temp->stattemp);
         free(temp);
     }
     *head = NULL;
