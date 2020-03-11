@@ -1,10 +1,15 @@
 #include "libmx.h"
 
 int mx_list_size(t_list *list) {
-    int size = 0;
+	int i = 0;
 
-    for (t_list *walker = list; walker != NULL; walker = walker->next, size++);
+	if (list) {
+		t_list *tmp = list;
 
-    return size;
+		while (tmp != NULL){
+			i++;
+			tmp = tmp->next;
+		}
+	}
+	return i;	
 }
-

@@ -71,7 +71,7 @@ static void check_arg(int argc, char *argv[], int i, int *is_error) {
     }
     bad_list = mx_sort_list(bad_list, mx_cmp);
     mx_print_bad_list(bad_list);
-    mx_delete_list(&bad_list);
+    mx_del_list(&bad_list);
 }
 
 

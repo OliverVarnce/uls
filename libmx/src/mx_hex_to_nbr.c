@@ -1,23 +1,22 @@
-#include "libmx.h"
-
-static char mx_tolower(char c) {
-	if (c >= 'A' && c <= 'Z') {
-		return c + 32;
-	}
-	return c;
-}
+#include "libmx.h" 
 
 unsigned long mx_hex_to_nbr(const char *hex) {
-	int hex_len = mx_strlen(hex);
-	char hex_digits[] = {'0', '1', '2', '3', '4', '5', '6'
-							, '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-	unsigned long dec_num = 0;
+	unsigned long nbr = 0;
+	unsigned long base = 1;
 
-	for (int i = 0, power = hex_len - 1; i < hex_len; i++, power--) {
-		for (int j = 0; j < 16; j++) {
-			if (mx_tolower(hex[i]) == hex_digits[j])
-				dec_num += j * mx_pow(16, power);
+	for (int i = mx_strlen(hex) - 1; i >= 0; i--) {
+		if (hex[i] >= '0' && hex[i] <= '9') {
+			nbr += (hex[i] - 48) * base;
+			base *= 16;
+		}
+		if (hex[i] >= 'A' && hex[i] <= 'F') {
+			nbr += (hex[i] - 55) * base;
+			base *= 16;
+		}
+		if (hex[i] >= 'a' && hex[i] <= 'f') {
+			nbr += (hex[i] - 87) * base;
+			base *= 16;
 		}
 	}
-	return dec_num;
+	return nbr;
 }

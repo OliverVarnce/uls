@@ -1,12 +1,9 @@
 #include "libmx.h"
 
 double mx_pow(double n, unsigned int pow) {
-    double raised = 1;
+	double res  = 1.0;
 
-    if (n == 0) return 1;
-
-    while (pow--) {
-        raised *= n;
-    }
-    return raised;
+	while (pow--)
+		res *= n;
+	return res;
 }
