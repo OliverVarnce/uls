@@ -1,7 +1,31 @@
 #include "uls.h"
+//sdfasdfa
+void print_reg(char *name, mode_t value){
+    if(((value & 0x040) && (value & 0x800))
+       || (!(value & 0x040) && (value & 0x800)))
+        mx_add_color(name, MX_BLACK_RED);
+    else if(value & 0x040 && !(value & 0x800)
+            && (((value & 0x008) && (value & 0x400))
+                || (!(value & 0x008) && (value & 0x400))))
+        mx_add_color(name, MX_AQUA_BLACK);
+    else if((value & 0x040 && !(value & 0x800))
+            || (value & 0x008 && !(value & 0x400))
+            || (value & 0x001 && !(value & 0x200))
+            || (value & 0x001 && value & 0x200))
+        mx_add_color(name, MX_RED);
+    else
+        mx_add_color(name, MX_DEFAULT);
+}
 
-static void print_reg(char *name, mode_t value);
-static void print_dir(char *name, mode_t value);
+void print_dir(char *name, mode_t value){
+    if((value & 0x002) &&((value & 0x001 && value & 0x200)
+                          || (value & 0x001 && value & 0x200)))
+        mx_add_color(name, GREEN_BLACK);
+    else if(value & 0x002 && (value & 0x001 && !(value & 0x200)))
+        mx_add_color(name, YELLOW_BLACK);
+    else
+        mx_add_color(name, MX_BLUE);
+}
 
 void mx_add_color(char *name, char *col){
     mx_printstr(col);
@@ -32,29 +56,3 @@ void mx_out_G(char *name, mode_t value) {
     }
 }
 
-static void print_reg(char *name, mode_t value){
-    if(((value & 0x040) && (value & 0x800)) 
-    || (!(value & 0x040) && (value & 0x800)))
-        mx_add_color(name, MX_BLACK_RED);
-    else if(value & 0x040 && !(value & 0x800) 
-    && (((value & 0x008) && (value & 0x400)) 
-    || (!(value & 0x008) && (value & 0x400))))
-        mx_add_color(name, MX_AQUA_BLACK);
-    else if((value & 0x040 && !(value & 0x800)) 
-    || (value & 0x008 && !(value & 0x400)) 
-    || (value & 0x001 && !(value & 0x200)) 
-    || (value & 0x001 && value & 0x200))
-        mx_add_color(name, MX_RED);
-    else 
-        mx_add_color(name, MX_DEFAULT);
-}
-
-static void print_dir(char *name, mode_t value){
-    if((value & 0x002) &&((value & 0x001 && value & 0x200) 
-    || (value & 0x001 && value & 0x200)))
-        mx_add_color(name, MX_GREEN_BLACK);
-    else if(value & 0x002 && (value & 0x001 && !(value & 0x200)))
-        mx_add_color(name, MX_YELLOW_BLACK);
-    else
-        mx_add_color(name, MX_BLUE);
-}
