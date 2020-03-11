@@ -7,17 +7,17 @@
 #define MX_MINOR(dev)      ((unsigned int) ((dev) & MX_MINORMASK))
 
 #define MX_RED  "\33[31m"
-#define MX_YELLOW  "\33[33m"
-#define MX_PINK  "\33[35m"
+#define YELLOW  "\33[33m"
+#define PINK  "\33[35m"
 #define MX_AQUA  "\33[36m"
 #define MX_BLUE  "\33[34m"
-#define MX_GREEN "\33[32m"
-#define MX_YELLOW_BLUE  "\33[43m\33[34m"
-#define MX_AQUA_BLUE  "\33[46m\33[34m"
-#define MX_GREEN_BLACK "\33[42m\33[30m"
+#define GREEN "\33[32m"
+#define BLUE  "\33[43m\33[34m"
+#define AQUA_BLUE  "\33[46m\33[34m"
+#define GREEN_BLACK "\33[42m\33[30m"
 #define MX_BLACK_RED "\33[30m\33[41m"
 #define MX_AQUA_BLACK "\33[46m\33[30m"
-#define MX_YELLOW_BLACK "\33[43m\33[30m"
+#define YELLOW_BLACK "\33[43m\33[30m"
 #define MX_DEFAULT  "\33[0m"
 
 #include "./libmx/inc/libmx.h"
@@ -55,7 +55,7 @@ typedef struct s_flags {
     bool flag_c;
     bool flag_S;
     bool flag_t;
-}t_flags;
+} t_flags;
 
 typedef struct s_column_size {
     int col_one_size;
@@ -69,16 +69,16 @@ typedef struct s_column_size {
     int cur_col_two_size;
     int cur_col_three_size;
     int cur_col_four_size;
-}t_col_size;
+} t_col_size;
 
 typedef struct s_node {
     t_list_dir *ptr;
-}t_node;
+} t_node;
 
 typedef struct s_table {
     int cols;
     int rows;
-}t_table_info;
+} t_table_info;
 
 typedef void (*fptr)(t_list_dir *first, t_list_dir *second, t_flags *opts);
 
