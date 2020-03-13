@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_sortbysize_asc(t_list_dir *first, t_list_dir *second, t_flags *opts) {
+void mx_sortbysize_asc(t_dirlist *first, t_dirlist *second, t_flags *opts) {
     if (first->stattemp->st_size < second->stattemp->st_size && opts) {
         mx_swap(first, second);
         return;
@@ -13,7 +13,7 @@ void mx_sortbysize_asc(t_list_dir *first, t_list_dir *second, t_flags *opts) {
     }
 }
 
-void mx_sortbysize_desc(t_list_dir *first, t_list_dir *second, t_flags *opts) {
+void mx_sortbysize_desc(t_dirlist *first, t_dirlist *second, t_flags *opts) {
     if (first->stattemp->st_size > second->stattemp->st_size && opts) {
         mx_swap(first, second);
         return;

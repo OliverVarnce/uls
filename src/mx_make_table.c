@@ -1,12 +1,12 @@
 #include "uls.h"
 
 static t_node **create_table(int rows, int cols);
-static void fill_table(t_list_dir *head, t_node **arr, int rows);
+static void fill_table(t_dirlist *head, t_node **arr, int rows);
 static void print_table(t_node **arr, t_table_info table, int col_width,
 t_flags *opts);
 static void delete_table(t_node ***arr, int rows);
 
-void mx_make_table(t_list_dir *head, t_table_info table, int col_width,
+void mx_make_table(t_dirlist *head, t_table_info table, int col_width,
 t_flags *opts) {
     t_node **arr = create_table(table.rows, table.cols);
 
@@ -29,11 +29,11 @@ static t_node **create_table(int rows, int cols) {
     return arr;
 }
 
-static void fill_table(t_list_dir *head, t_node **arr, int rows) {
+static void fill_table(t_dirlist *head, t_node **arr, int rows) {
     int row = 0;
     int col = -1;
 
-    for (t_list_dir *w = head; w != NULL; w = w->next) {
+    for (t_dirlist *w = head; w != NULL; w = w->next) {
         if (row % rows == 0) {
             row = 0;
             col++;

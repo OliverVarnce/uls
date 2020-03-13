@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_create_lists(char *argv, t_list_dir **f_list, t_list_dir **d_list,
+void mx_create_lists(char *argv, t_dirlist **f_list, t_dirlist **d_list,
 t_flags *fl){
     struct stat stattemp;
 

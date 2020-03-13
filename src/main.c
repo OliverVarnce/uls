@@ -8,8 +8,8 @@ int main(int argc, char **argv) {
     t_flags flag;
     int first_file_pos = 1;
     int is_err = 0;
-    t_list_dir *file_list = NULL;
-    t_list_dir *dir_list = NULL;
+    t_dirlist *file_list = NULL;
+    t_dirlist *dir_list = NULL;
 
     init_opts(&flag);
     first_file_pos = read_arg(argc, argv, &flag);

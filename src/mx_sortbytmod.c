@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_sortbytmod_asc(t_list_dir *first, t_list_dir *second, t_flags *opts) {
+void mx_sortbytmod_asc(t_dirlist *first, t_dirlist *second, t_flags *opts) {
     struct timespec t1 = mx_get_time_type(first, opts);
     struct timespec t2 = mx_get_time_type(second, opts);
 
@@ -22,7 +22,7 @@ void mx_sortbytmod_asc(t_list_dir *first, t_list_dir *second, t_flags *opts) {
     }
 }
 
-void mx_sortbytmod_desc(t_list_dir *first, t_list_dir *second, t_flags *opts) {
+void mx_sortbytmod_desc(t_dirlist *first, t_dirlist *second, t_flags *opts) {
     struct timespec t1 = mx_get_time_type(first, opts);
     struct timespec t2 = mx_get_time_type(second, opts);
 

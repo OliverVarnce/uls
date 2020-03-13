@@ -81,7 +81,7 @@ add_executable(uls1
         src/main.c
         src/mx_constructor.c
         src/mx_create_node_dir.c
-        src/mx_delete_list_dir.c
+        src/mx_dirlist_del.c
         src/mx_get_file_type.c
         src/mx_get_flags.c
         src/mx_get_nums.c
