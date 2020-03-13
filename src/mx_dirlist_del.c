@@ -1,10 +1,10 @@
 #include "uls.h"
 
-void mx_delete_list_dir(t_list_dir **head) {
-    t_list_dir *w = *head;
+void mx_dirlist_del(t_dirlist **head) {
+    t_dirlist *w = *head;
 
     while (w != NULL) {
-        t_list_dir *temp = w;
+        t_dirlist *temp = w;
         w = w->next;
 
         free(temp->d_name);

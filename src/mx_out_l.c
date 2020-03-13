@@ -1,6 +1,6 @@
 #include "uls.h"
 
-static void init_cur_info(t_col_size *temp, t_list_dir *w, t_flags *fl) {
+static void init_cur_info(t_col_size *temp, t_dirlist *w, t_flags *fl) {
     temp->cur_col_one_size = 0;
     temp->cur_col_two_size = 0;
     temp->cur_col_three_size = 0;
@@ -31,11 +31,11 @@ static void init_start_info(t_col_size *temp) {
     temp->total_size = 0;
 }
 
-static t_col_size get_column_size(t_list_dir *lst, t_flags *fl) {
+static t_col_size get_column_size(t_dirlist *lst, t_flags *fl) {
     t_col_size temp;
 
     init_start_info(&temp);
-    for (t_list_dir *w = lst; w != NULL; w = w->next) {
+    for (t_dirlist *w = lst; w != NULL; w = w->next) {
         temp.pw = getpwuid(w->stattemp->st_uid);
         temp.gr = getgrgid(w->stattemp->st_gid);
         init_cur_info(&temp, w, fl);
@@ -52,7 +52,7 @@ static t_col_size get_column_size(t_list_dir *lst, t_flags *fl) {
     return temp;
 }
 
-void mx_out_l(t_list_dir *lst, t_flags *fl, bool pr_total) {
+void mx_out_l(t_dirlist *lst, t_flags *fl, bool pr_total) {
     t_col_size info = get_column_size(lst, fl);
 
     if (pr_total) {
@@ -60,7 +60,7 @@ void mx_out_l(t_list_dir *lst, t_flags *fl, bool pr_total) {
         mx_printint(info.total_size);
         mx_printchar('\n');
     }
-    for (t_list_dir *w = lst; w != NULL; w = w->next) {
+    for (t_dirlist *w = lst; w != NULL; w = w->next) {
         info.pw = getpwuid(w->stattemp->st_uid);
         info.gr = getgrgid(w->stattemp->st_gid);
         mx_print_perm_and_link(w, info);

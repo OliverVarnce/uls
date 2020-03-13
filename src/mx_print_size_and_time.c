@@ -3,9 +3,9 @@
 static char *short_time(time_t *t, t_flags *fl);
 static char *hex_minor (dev_t dev);
 static char *major_minor (dev_t dev);
-static char *get_time(t_list_dir *w, t_flags *fl);
+static char *get_time(t_dirlist *w, t_flags *fl);
 
-void mx_print_size_and_time(t_list_dir *w, t_flags *fl, t_col_size info) {
+void mx_print_size_and_time(t_dirlist *w, t_flags *fl, t_col_size info) {
     char *time_form = get_time(w, fl);
 
     if (mx_get_file_type(w->stattemp->st_mode) == 'c'
@@ -28,7 +28,7 @@ void mx_print_size_and_time(t_list_dir *w, t_flags *fl, t_col_size info) {
     free(time_form);
 }
 
-static char *get_time(t_list_dir *w, t_flags *fl) {
+static char *get_time(t_dirlist *w, t_flags *fl) {
     if(fl->flag_u)
         return short_time(&w->stattemp->st_atime, fl);
     else if(fl->flag_c)

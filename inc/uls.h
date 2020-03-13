@@ -37,7 +37,7 @@ typedef struct s_list_dir {
     char *path;
     struct stat *stattemp;
     struct s_list_dir *next;
-} t_list_dir;
+} t_dirlist;
 
 typedef struct s_flags {
     bool flag_l;
@@ -72,7 +72,7 @@ typedef struct s_column_size {
 }t_col_size;
 
 typedef struct s_node {
-    t_list_dir *ptr;
+    t_dirlist *ptr;
 }t_node;
 
 typedef struct s_table {
@@ -80,50 +80,51 @@ typedef struct s_table {
     int rows;
 }t_table_info;
 
-typedef void (*fptr)(t_list_dir *first, t_list_dir *second, t_flags *opts);
+typedef void (*fptr)(t_dirlist *first, t_dirlist *second, t_flags *opts);
 
-t_list_dir *mx_create_node_dir(const char *d_name, const char *path);
-void mx_push_front_dir(t_list_dir **list, const char *d_name,
+t_dirlist *mx_create_node_dir(const char *d_name, const char *path);
+void mx_push_front_dir(t_dirlist **list, const char *d_name,
 const char *path);
-void mx_create_lists(char *argv, t_list_dir **f_list, t_list_dir **d_list, t_flags *fl);
-void mx_push_back_dir(t_list_dir **list, const char *d_name, const char *path);
-int mx_list_size_dir(t_list_dir *list, int *max_len);
-void mx_delete_list_dir(t_list_dir **head);
-t_list_dir *mx_sort_list_dir(t_list_dir *lst, t_flags *opts);
+void mx_create_lists(char *argv, t_dirlist **f_list, t_dirlist **d_list, t_flags *fl);
+void mx_push_back_dir(t_dirlist **list, const char *d_name, const char *path);
+int mx_list_size_dir(t_dirlist *list, int *max_len);
+void mx_dirlist_del(t_dirlist **head);
+t_dirlist *mx_sort_list_dir(t_dirlist *lst, t_flags *opts);
 char mx_get_file_type(mode_t value);
-void mx_print_table(t_list_dir *head, t_flags *opts);
-void mx_out_l(t_list_dir *lst, t_flags *fl, bool pr_total);
+void mx_print_table(t_dirlist *head, t_flags *opts);
+void mx_out_l(t_dirlist *lst, t_flags *fl, bool pr_total);
 void mx_add_color(char *name, char *col);
 void mx_out_G(char *name, mode_t value);
-void mx_out_1(t_list_dir *head, t_flags *opts);
-int mx_constructor(t_list_dir *file_list, t_list_dir *dir_list, t_flags flag,
+void mx_out_1(t_dirlist *head, t_flags *opts);
+int mx_constructor(t_dirlist *file_list, t_dirlist *dir_list, t_flags flag,
 int files_cnt);
 void mx_dir_parser(char *path, t_flags *opts, bool print_header,
 int *is_err);
-t_list_dir *mx_make_dir_list(char *path, t_list_dir *list,
+t_dirlist *mx_make_dir_list(char *path, t_dirlist *list,
 t_flags *opts, int *error_no);
-void mx_print_dir_list(char *dir_name, t_list_dir *list, t_flags *opts,
+void mx_print_dir_list(char *dir_name, t_dirlist *list, t_flags *opts,
 bool print_header);
 t_flags *mx_get_flags(t_flags *fl, char *flags);
-void mx_sortbylexic_desc(t_list_dir *first, t_list_dir *second, t_flags *opts);
-void mx_sortbysize_desc(t_list_dir *first, t_list_dir *second, t_flags *opts);
-void mx_sortbytmod_desc(t_list_dir *first, t_list_dir *second, t_flags *opts);
-void mx_sortbylexic_asc(t_list_dir *first, t_list_dir *second, t_flags *opts);
-void mx_sortbysize_asc(t_list_dir *first, t_list_dir *second, t_flags *opts);
-void mx_sortbytmod_asc(t_list_dir *first, t_list_dir *second, t_flags *opts);
-void mx_swap(t_list_dir *first, t_list_dir *second);
-struct timespec mx_get_time_type(t_list_dir *node, t_flags *opts);
+void mx_sortbylexic_desc(t_dirlist *first, t_dirlist *second, t_flags *opts);
+void mx_sortbysize_desc(t_dirlist *first, t_dirlist *second, t_flags *opts);
+void mx_sortbytmod_desc(t_dirlist *first, t_dirlist *second, t_flags *opts);
+void mx_sortbylexic_asc(t_dirlist *first, t_dirlist *second, t_flags *opts);
+void mx_sortbysize_asc(t_dirlist *first, t_dirlist *second, t_flags *opts);
+void mx_sortbytmod_asc(t_dirlist *first, t_dirlist *second, t_flags *opts);
+void mx_swap(t_dirlist *first, t_dirlist *second);
+struct timespec mx_get_time_type(t_dirlist *node, t_flags *opts);
 int mx_get_nums(int num);
-void mx_print_perm_and_link(t_list_dir *w, t_col_size info);
-void mx_print_size_and_time(t_list_dir *w, t_flags *fl, t_col_size info);
-void mx_print_uid_gid(t_list_dir *w, t_flags *fl, t_col_size info);
-void mx_print_name_or_link(t_list_dir *w, t_flags *fl);
+void mx_print_perm_and_link(t_dirlist *w, t_col_size info);
+void mx_print_size_and_time(t_dirlist *w, t_flags *fl, t_col_size info);
+void mx_print_uid_gid(t_dirlist *w, t_flags *fl, t_col_size info);
+void mx_print_name_or_link(t_dirlist *w, t_flags *fl);
 void mx_err_dir(char *path);
 void mx_print_bad_list(t_list *lst);
 bool mx_cmp(void *s1, void *s2);
 void mx_printerror(char *path, int error_no, bool print_header);
 bool mx_is_valid_flag(char *s);
-void mx_make_table(t_list_dir *head, t_table_info table, int col_width,
+void mx_make_table(t_dirlist *head, t_table_info table, int col_width,
 t_flags *opts);
+void mx_dirlist_out(t_dirlist *list, t_flags *opts);
 
 #endif

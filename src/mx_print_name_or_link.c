@@ -1,8 +1,8 @@
 #include "uls.h"
 
-static char *get_link(t_list_dir *node, t_flags *fl);
+static char *get_link(t_dirlist *node, t_flags *fl);
 
-void mx_print_name_or_link(t_list_dir *w, t_flags *fl){
+void mx_print_name_or_link(t_dirlist *w, t_flags *fl){
     char *link = NULL;
 
     if (mx_get_file_type(w->stattemp->st_mode) == 'l') {
@@ -17,7 +17,7 @@ void mx_print_name_or_link(t_list_dir *w, t_flags *fl){
     mx_printchar('\n');
 }
 
-static char *get_link(t_list_dir *node, t_flags *fl) {
+static char *get_link(t_dirlist *node, t_flags *fl) {
     char temp[256];
     char *res = NULL;
 

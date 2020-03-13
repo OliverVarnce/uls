@@ -3,7 +3,7 @@
 static void get_rc_num(int elements, int win_width, int col_width, 
 t_table_info *table);
 
-void mx_print_table(t_list_dir *head, t_flags *opts) {
+void mx_print_table(t_dirlist *head, t_flags *opts) {
     int col_width = 0;
     int elements = mx_list_size_dir(head, &col_width);
     t_table_info table;

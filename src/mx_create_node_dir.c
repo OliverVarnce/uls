@@ -1,7 +1,7 @@
 #include "uls.h"
 
-t_list_dir *mx_create_node_dir(const char *d_name, const char *path) {
-    t_list_dir *node = (t_list_dir *)malloc(sizeof(t_list_dir));
+t_dirlist *mx_create_node_dir(const char *d_name, const char *path) {
+    t_dirlist *node = (t_dirlist *)malloc(sizeof(t_dirlist));
     char *path_w_slash = NULL;
 
     if (!node)

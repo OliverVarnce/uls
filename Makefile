@@ -6,7 +6,7 @@ SRC   = mx_create_node_dir \
 		mx_sortbysize \
 		mx_sortbylexic \
 		mx_sortbytmod \
-		mx_delete_list_dir \
+		mx_dirlist_del \
 		mx_get_file_type \
 		mx_list_size_dir \
 		mx_out_1 \
@@ -26,7 +26,8 @@ SRC   = mx_create_node_dir \
 		mx_other \
 		main \
 		mx_make_table \
-		mx_create_lists
+		mx_create_lists \
+		mx_dirlist_out
 
 SRCS = $(addsuffix .c, $(SRC))
 

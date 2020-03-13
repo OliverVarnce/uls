@@ -1,6 +1,6 @@
 #include "uls.h"
 
-void mx_print_uid_gid(t_list_dir *w, t_flags *fl, t_col_size info) {
+void mx_print_uid_gid(t_dirlist *w, t_flags *fl, t_col_size info) {
     char *uid = mx_itoa(w->stattemp->st_uid);
 
     if(!fl->flag_g) {
