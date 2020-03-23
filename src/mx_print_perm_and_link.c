@@ -1,6 +1,6 @@
 #include "uls.h"
 
-static void print_perm_type(mode_t value);
+static void print_perm_type(mode_t val);
 static char return_acl(char *filename);
 
 void mx_print_perm_and_link(t_dirlist *w, t_col_size info) {
@@ -15,19 +15,19 @@ void mx_print_perm_and_link(t_dirlist *w, t_col_size info) {
     mx_printchar(' ');
 }
 
-static void print_perm_type(mode_t value) {
-    value & 0x100 ? mx_printchar('r') : mx_printchar('-');
-    value & 0x080 ? mx_printchar('w') : mx_printchar('-');
-    value & 0x040 ? (value & 0x800 ? mx_printchar('s') : mx_printchar('x')) 
-    : (value & 0x800 ? mx_printchar('S') : mx_printchar('-'));
-    value & 0x020 ? mx_printchar('r') : mx_printchar('-');
-    value & 0x010 ? mx_printchar('w') : mx_printchar('-');
-    value & 0x008 ? (value & 0x400 ? mx_printchar('s') : mx_printchar('x')) 
-    : (value & 0x400 ? mx_printchar('S') : mx_printchar('-'));
-    value & 0x004 ? mx_printchar('r') : mx_printchar('-');
-    value & 0x002 ? mx_printchar('w') : mx_printchar('-');
-    value & 0x001 ? (value & 0x200 ? mx_printchar('t') : mx_printchar('x')) 
-    : (value & 0x200 ? mx_printchar('T') : mx_printchar('-'));
+static void print_perm_type(mode_t val) {
+    val & 0x100 ? mx_printchar('r') : mx_printchar('-');
+    val & 0x080 ? mx_printchar('w') : mx_printchar('-');
+    val & 0x040 ? (val & 0x800 ? mx_printchar('s') : mx_printchar('x'))
+    : (val & 0x800 ? mx_printchar('S') : mx_printchar('-'));
+    val & 0x020 ? mx_printchar('r') : mx_printchar('-');
+    val & 0x010 ? mx_printchar('w') : mx_printchar('-');
+    val & 0x008 ? (val & 0x400 ? mx_printchar('s') : mx_printchar('x'))
+    : (val & 0x400 ? mx_printchar('S') : mx_printchar('-'));
+    val & 0x004 ? mx_printchar('r') : mx_printchar('-');
+    val & 0x002 ? mx_printchar('w') : mx_printchar('-');
+    val & 0x001 ? (val & 0x200 ? mx_printchar('t') : mx_printchar('x'))
+    : (val & 0x200 ? mx_printchar('T') : mx_printchar('-'));
 }
 
 static char return_acl(char *filename) {

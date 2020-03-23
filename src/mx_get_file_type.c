@@ -1,7 +1,7 @@
 #include "uls.h"
 
-char mx_get_file_type(mode_t value) {
-    switch (value & 0xF000) {
+char mx_get_file_type(mode_t val) {
+    switch (val & 0xF000) {
         case 0x1000:    return 'p'; // FIFO/pipe
         case 0x2000:    return 'c'; // character device
         case 0x4000:    return 'd'; // directory

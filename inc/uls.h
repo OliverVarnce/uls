@@ -62,7 +62,7 @@ typedef struct s_column_size {
     int col_two_size;
     int col_three_size;
     int col_four_size;
-    int total_size; 
+    int total_size;
     struct passwd *pw;
     struct group *gr;
     int cur_col_one_size;
@@ -84,26 +84,26 @@ typedef void (*fptr)(t_dirlist *first, t_dirlist *second, t_flags *opts);
 
 t_dirlist *mx_create_node_dir(const char *d_name, const char *path);
 void mx_push_front_dir(t_dirlist **list, const char *d_name,
-const char *path);
+                       const char *path);
 void mx_create_lists(char *argv, t_dirlist **f_list, t_dirlist **d_list, t_flags *fl);
 void mx_push_back_dir(t_dirlist **list, const char *d_name, const char *path);
 int mx_list_size_dir(t_dirlist *list, int *max_len);
 void mx_dirlist_del(t_dirlist **head);
 t_dirlist *mx_sort_list_dir(t_dirlist *lst, t_flags *opts);
-char mx_get_file_type(mode_t value);
+char mx_get_file_type(mode_t val);
 void mx_print_table(t_dirlist *head, t_flags *opts);
 void mx_out_l(t_dirlist *lst, t_flags *fl, bool pr_total);
-void mx_add_color(char *name, char *col);
-void mx_out_G(char *name, mode_t value);
+void mx_set_color(char *name, char *col);
+void mx_out_G(char *name, mode_t val);
 void mx_out_1(t_dirlist *head, t_flags *opts);
 int mx_constructor(t_dirlist *file_list, t_dirlist *dir_list, t_flags flag,
-int files_cnt);
+                   int files_cnt);
 void mx_dir_parser(char *path, t_flags *opts, bool print_header,
-int *is_err);
+                   int *is_err);
 t_dirlist *mx_make_dir_list(char *path, t_dirlist *list,
-t_flags *opts, int *error_no);
+                            t_flags *opts, int *error_no);
 void mx_print_dir_list(char *dir_name, t_dirlist *list, t_flags *opts,
-bool print_header);
+                       bool print_header);
 t_flags *mx_get_flags(t_flags *fl, char *flags);
 void mx_sortbylexic_desc(t_dirlist *first, t_dirlist *second, t_flags *opts);
 void mx_sortbysize_desc(t_dirlist *first, t_dirlist *second, t_flags *opts);
@@ -124,7 +124,8 @@ bool mx_cmp(void *s1, void *s2);
 void mx_printerror(char *path, int error_no, bool print_header);
 bool mx_is_valid_flag(char *s);
 void mx_make_table(t_dirlist *head, t_table_info table, int col_width,
-t_flags *opts);
+                   t_flags *opts);
 void mx_dirlist_out(t_dirlist *list, t_flags *opts);
+void mx_print_reg(char *name, mode_t val);
 
 #endif
