@@ -1,10 +1,10 @@
 #ifndef ULS_H
 #define ULS_H
 
-#define MX_MINORBITS       24
-#define MX_MINORMASK       ((1U << MX_MINORBITS) - 1)
-#define MX_MAJOR(dev)      ((unsigned int) ((dev) >> MX_MINORBITS))
-#define MX_MINOR(dev)      ((unsigned int) ((dev) & MX_MINORMASK))
+#define MX_MINORBITS 24
+#define MX_MINORMASK ((1U << MX_MINORBITS) - 1)
+#define MX_MAJOR(dev) ((unsigned int) ((dev) >> MX_MINORBITS))
+#define MX_MINOR(dev) ((unsigned int) ((dev) & MX_MINORMASK))
 
 #define RED  "\33[31m"
 #define YELLOW  "\33[33m"
