@@ -22,7 +22,7 @@ static char *get_link(t_dirlist *node, t_flags *fl) {
     char *res = NULL;
 
     mx_memset(temp, '\0', 256);
-    if(fl->flag_G)
+    if (fl->flag_G)
         mx_set_color(node->d_name, PINK);
     else
         mx_printstr(node->d_name); 

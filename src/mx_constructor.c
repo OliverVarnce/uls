@@ -50,16 +50,16 @@ t_dirlist *dir_list, t_flags flag, int files_cnt) {
     return is_err;
 }
 
-void mx_dir_parser(char *path, t_flags *opts, bool print_header,
-int *is_err) {
+void mx_dir_parser(char *path, t_flags *opts, bool print_header, int *is_err) {
     t_dirlist *list = NULL;
     int error_no = -1;
 
     list = make_dir_list(path, list, opts, &error_no);
     if (error_no != -1)
         *is_err = 1;
-    mx_printerror(path, error_no, print_header);
+    mx_print_error(path, error_no, print_header);
     mx_dirlist_out(list, opts);
+
     if (opts->flag_R) {
         for (t_dirlist *w = list; w != NULL; w = w->next) {
             if (mx_get_file_type(w->stattemp->st_mode) == 'd'

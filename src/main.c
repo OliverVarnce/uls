@@ -6,10 +6,10 @@ static int read_arg(int argc, char *argv[], t_flags *fl);
 
 int main(int argc, char **argv) {
     t_flags flag;
-    int first_file_pos = 1;
-    int is_err = 0;
     t_dirlist *file_list = NULL;
     t_dirlist *dir_list = NULL;
+    int first_file_pos = 1;
+    int is_err = 0;
 
     init_opts(&flag);
     first_file_pos = read_arg(argc, argv, &flag);
@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     dir_list = mx_sort_list_dir(dir_list, &flag);
     is_err = mx_constructor(file_list, dir_list, flag, argc - first_file_pos);
 
-    system("leaks -q uls");
+    // system("leaks -q uls");
 
     return is_err;
 }
@@ -47,12 +47,12 @@ static void init_opts(t_flags *opts) {
     opts->flag_t = false;
 }
 
-static void check_arg(int argc, char *argv[], int i, int *is_error) {
+static void check_arg(int argc, char **argv, int i, int *is_error) {
     struct stat sb;
     t_list *bad_list = NULL;
 
     for(; i < argc; i++) {
-        if(lstat(argv[i],  &sb) == -1) {
+        if(lstat(argv[i], &sb) == -1) {
             *is_error = 1;
             mx_push_front(&bad_list, argv[i]);
         }
@@ -62,15 +62,14 @@ static void check_arg(int argc, char *argv[], int i, int *is_error) {
     mx_del_list(&bad_list);
 }
 
-
-static int read_arg(int argc, char *argv[], t_flags *fl) {
+static int read_arg(int argc, char **argv, t_flags *fl) {
     int pos = 1;
     
-    if(!isatty(STDOUT_FILENO)) {
+    if (!isatty(STDOUT_FILENO)) {
         fl->flag_C = false;
         fl->flag_1 = true;
     }
-    for(int k = 1; k < argc; k++){
+    for (int k = 1; k < argc; k++){
         if(*argv[k] == '-' && mx_strlen(argv[k]) != 1){
             pos++;
             fl = mx_get_flags(fl, argv[k]);

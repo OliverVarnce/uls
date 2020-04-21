@@ -12,7 +12,7 @@ void mx_dir_err(char *path) {
     free(split);
 }
 
-void mx_printerror(char *path, int error_no, bool print_header){
+void mx_print_error(char *path, int error_no, bool print_header) {
     if (print_header) {
         mx_printstr(path);
         mx_printstr(":\n");
@@ -23,12 +23,12 @@ void mx_printerror(char *path, int error_no, bool print_header){
 
 bool mx_is_valid_flag(char *s) {
     bool res;
-    static const char *allf = "lC1aAGrRTngucSt";
+    static const char *all_flags = "lC1aAGrRTngucSt";
 
-    while(*s) {
+    while (*s) {
         res = false;
-        for (int i = 0, j = mx_strlen(allf); i < j; i++) {
-            if(*s == allf[i])
+        for (int i = 0, j = mx_strlen(all_flags); i < j; i++) {
+            if(*s == all_flags[i])
                 res = true;
         }
         if (res == false) {
