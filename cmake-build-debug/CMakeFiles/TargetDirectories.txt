@@ -1,3 +1,0 @@
-/Users/andrii/CLionProjects/uls-new111/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/andrii/CLionProjects/uls-new111/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/andrii/CLionProjects/uls-new111/cmake-build-debug/CMakeFiles/uls1.dir

@@ -1,22 +1,5 @@
 #include "uls.h"
 
-static t_node **create_table(int rows, int cols);
-static void fill_table(t_dirlist *head, t_node **arr, int rows);
-static void print_table(t_node **arr, t_table_info table, int col_width,
-t_flags *opts);
-static void delete_table(t_node ***arr, int rows);
-
-void mx_make_table(t_dirlist *head, t_table_info table, int col_width,
-t_flags *opts) {
-    t_node **arr = create_table(table.rows, table.cols);
-
-    if (!arr)
-        return;
-    fill_table(head, arr, table.rows);
-    print_table(arr, table, col_width, opts);
-    delete_table(&arr, table.rows);
-}
-
 static t_node **create_table(int rows, int cols) {
     t_node **arr;
 
@@ -44,16 +27,16 @@ static void fill_table(t_dirlist *head, t_node **arr, int rows) {
 }
 
 static void print_table(t_node **arr, t_table_info table, int col_width,
-t_flags *opts) {
+                 t_flags *opts) {
     for (int i = 0; i < table.rows; i++) {
         for (int j = 0; j < table.cols; j++)
             if (arr[i][j].ptr != NULL) {
                 opts->flag_G ?
                 mx_out_G(arr[i][j].ptr->d_name,
-                arr[i][j].ptr->stattemp->st_mode) :
+                         arr[i][j].ptr->stattemp->st_mode) :
                 mx_printstr(arr[i][j].ptr->d_name);
-                if (j != table.cols - 1 
-                && !(j == table.cols - 2 && arr[i][j+1].ptr == NULL)) {
+                if (j != table.cols - 1
+                    && !(j == table.cols - 2 && arr[i][j+1].ptr == NULL)) {
                     int str_len = mx_strlen(arr[i][j].ptr->d_name);
                     int tabs = (col_width - str_len) / 8;
 
@@ -73,4 +56,15 @@ static void delete_table(t_node ***arr, int rows) {
     }
     free(*arr);
     *arr = NULL;
+}
+
+void mx_make_table(t_dirlist *head, t_table_info table, int col_width,
+t_flags *opts) {
+    t_node **arr = create_table(table.rows, table.cols);
+
+    if (!arr)
+        return;
+    fill_table(head, arr, table.rows);
+    print_table(arr, table, col_width, opts);
+    delete_table(&arr, table.rows);
 }

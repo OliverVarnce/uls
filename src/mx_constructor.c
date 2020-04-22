@@ -29,8 +29,31 @@ static void print_selector(t_dirlist *file_list, t_flags flag){
         mx_print_table(file_list, &flag);
 }
 
+void mx_dir_parser(char *path, t_flags *opts, bool print_header, int *is_err) {
+    t_dirlist *list = NULL;
+    int error_no = -1;
+
+    list = make_dir_list(path, list, opts, &error_no);
+    if (error_no != -1)
+        *is_err = 1;
+    mx_print_error(path, error_no, print_header);
+    mx_dirlist_out(list, opts);
+
+    if (opts->flag_R) {
+        for (t_dirlist *w = list; w != NULL; w = w->next) {
+            if (mx_get_file_type(w->stattemp->st_mode) == 'd'
+                && !(mx_strcmp(w->d_name, ".") == 0
+                     || mx_strcmp(w->d_name, "..") == 0)) {
+                mx_printchar('\n');
+                mx_dir_parser(w->path, opts, true, is_err);
+            }
+        }
+    }
+    mx_dirlist_del(&list);
+}
+
 int mx_constructor(t_dirlist *file_list,
-t_dirlist *dir_list, t_flags flag, int files_cnt) {
+                   t_dirlist *dir_list, t_flags flag, int files_cnt) {
     int is_err = 0;
 
     file_list = mx_sort_list_dir(file_list, &flag);
@@ -49,27 +72,3 @@ t_dirlist *dir_list, t_flags flag, int files_cnt) {
     mx_dirlist_del(&dir_list);
     return is_err;
 }
-
-void mx_dir_parser(char *path, t_flags *opts, bool print_header, int *is_err) {
-    t_dirlist *list = NULL;
-    int error_no = -1;
-
-    list = make_dir_list(path, list, opts, &error_no);
-    if (error_no != -1)
-        *is_err = 1;
-    mx_print_error(path, error_no, print_header);
-    mx_dirlist_out(list, opts);
-
-    if (opts->flag_R) {
-        for (t_dirlist *w = list; w != NULL; w = w->next) {
-            if (mx_get_file_type(w->stattemp->st_mode) == 'd'
-            && !(mx_strcmp(w->d_name, ".") == 0
-            || mx_strcmp(w->d_name, "..") == 0)) {
-                mx_printchar('\n');
-                mx_dir_parser(w->path, opts, true, is_err);
-            }
-        }
-    }
-    mx_dirlist_del(&list);
-}
-
