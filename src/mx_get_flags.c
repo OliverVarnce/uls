@@ -2,30 +2,30 @@
 
 static void check_output_flags(t_flags *opts, char *flags);
 static void check_info_flag(t_flags *opts, char *flags);
-static void check_l_miniflags(t_flags *opts, char *flags);
+static void check_l_mini_flags(t_flags *opts, char *flags);
 static void check_gn_flags(t_flags *opts, char *flags);
 
-t_flags *mx_get_flags(t_flags *fl, char *flags) {
-    if(*++flags == '\0') {
+t_flags *mx_get_flags(t_flags *flag, char *flags) {
+    if (*++flags == '\0') {
         exit(1);
     }
-    if(mx_is_valid_flag(flags)) {
-        check_output_flags(fl, flags);
-        check_info_flag(fl, flags);
-        check_l_miniflags(fl, flags);
-        check_gn_flags(fl, flags);
-        if(!isatty(STDOUT_FILENO))
-            fl->flag_G = false;
+    if (mx_is_valid_flag(flags)) {
+        check_output_flags(flag, flags);
+        check_info_flag(flag, flags);
+        check_l_mini_flags(flag, flags);
+        check_gn_flags(flag, flags);
+        if (!isatty(STDOUT_FILENO))
+            flag->flag_G = false;
     }
     else {
         mx_printerr("usage: uls [-lC1aAGrRTngucSt] [file ...]\n");
         exit(1);
     }
-    return fl;
+    return flag;
 }
 
 static void check_output_flags(t_flags *opts, char *flags) {
-    while(*flags) {
+    while (*flags) {
         switch (*flags) {
             case 'l': opts->flag_l = true;
                 opts->flag_C = false;
@@ -47,7 +47,7 @@ static void check_output_flags(t_flags *opts, char *flags) {
 }
 
 static void check_info_flag(t_flags *opts, char *flags) {
-    while(*flags) {
+    while (*flags) {
         switch (*flags) {
             case 'a': opts->flag_a = true;
                 opts->flag_A = false;
@@ -68,8 +68,8 @@ static void check_info_flag(t_flags *opts, char *flags) {
     }
 }
 
-static void check_l_miniflags(t_flags *opts, char *flags) {
-    while(*flags) {
+static void check_l_mini_flags(t_flags *opts, char *flags) {
+    while (*flags) {
         switch (*flags) {
         case 'T': opts->flag_T = true;
             break;
@@ -85,7 +85,7 @@ static void check_l_miniflags(t_flags *opts, char *flags) {
 }
 
 static void check_gn_flags(t_flags *opts, char *flags){
-    while(*flags) {
+    while (*flags) {
         switch (*flags) {
             case 'n': opts->flag_n = true;
             opts->flag_l = true;

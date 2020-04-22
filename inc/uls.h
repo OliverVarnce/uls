@@ -1,10 +1,10 @@
 #ifndef ULS_H
 #define ULS_H
 
-#define MX_MINORBITS       24
-#define MX_MINORMASK       ((1U << MX_MINORBITS) - 1)
-#define MX_MAJOR(dev)      ((unsigned int) ((dev) >> MX_MINORBITS))
-#define MX_MINOR(dev)      ((unsigned int) ((dev) & MX_MINORMASK))
+#define MX_MINORBITS 24
+#define MX_MINORMASK ((1U << MX_MINORBITS) - 1)
+#define MX_MAJOR(dev) ((unsigned int) ((dev) >> MX_MINORBITS))
+#define MX_MINOR(dev) ((unsigned int) ((dev) & MX_MINORMASK))
 
 #define RED  "\33[31m"
 #define YELLOW  "\33[33m"
@@ -14,7 +14,7 @@
 #define GREEN "\33[32m"
 #define YELLOW_BLUE  "\33[43m\33[34m"
 #define LIGHT_BLUE  "\33[46m\33[34m"
-#define GREEN_BLACK "\33[42m\33[30m"
+#define GREEN_BLACK "\33ls[42m\33[30m"
 #define BLACK_RED "\33[30m\33[41m"
 #define AQUA_BLACK "\33[46m\33[30m"
 #define YELLOW_BLACK "\33[43m\33[30m"
@@ -55,7 +55,7 @@ typedef struct s_flags {
     bool flag_c;
     bool flag_S;
     bool flag_t;
-}t_flags;
+} t_flags;
 
 typedef struct s_column_size {
     int col_one_size;
@@ -69,16 +69,16 @@ typedef struct s_column_size {
     int cur_col_two_size;
     int cur_col_three_size;
     int cur_col_four_size;
-}t_col_size;
+} t_col_size;
 
 typedef struct s_node {
     t_dirlist *ptr;
-}t_node;
+} t_node;
 
 typedef struct s_table {
     int cols;
     int rows;
-}t_table_info;
+} t_table_info;
 
 typedef void (*fptr)(t_dirlist *first, t_dirlist *second, t_flags *opts);
 
@@ -104,7 +104,7 @@ t_dirlist *mx_make_dir_list(char *path, t_dirlist *list,
                             t_flags *opts, int *error_no);
 void mx_print_dir_list(char *dir_name, t_dirlist *list, t_flags *opts,
                        bool print_header);
-t_flags *mx_get_flags(t_flags *fl, char *flags);
+t_flags *mx_get_flags(t_flags *flag, char *flags);
 void mx_sortbylexic_desc(t_dirlist *first, t_dirlist *second, t_flags *opts);
 void mx_sortbysize_desc(t_dirlist *first, t_dirlist *second, t_flags *opts);
 void mx_sortbytmod_desc(t_dirlist *first, t_dirlist *second, t_flags *opts);
@@ -121,7 +121,7 @@ void mx_print_name_or_link(t_dirlist *w, t_flags *fl);
 void mx_err_dir(char *path);
 void mx_print_bad_list(t_list *lst);
 bool mx_cmp(void *s1, void *s2);
-void mx_printerror(char *path, int error_no, bool print_header);
+void mx_print_error(char *path, int error_no, bool print_header);
 bool mx_is_valid_flag(char *s);
 void mx_make_table(t_dirlist *head, t_table_info table, int col_width,
                    t_flags *opts);

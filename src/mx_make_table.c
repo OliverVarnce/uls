@@ -54,10 +54,10 @@ t_flags *opts) {
                 mx_printstr(arr[i][j].ptr->d_name);
                 if (j != table.cols - 1 
                 && !(j == table.cols - 2 && arr[i][j+1].ptr == NULL)) {
-                    int strlen = mx_strlen(arr[i][j].ptr->d_name);
-                    int tabs = (col_width - strlen) / 8;
+                    int str_len = mx_strlen(arr[i][j].ptr->d_name);
+                    int tabs = (col_width - str_len) / 8;
 
-                    if (strlen % 8 != 0)
+                    if (str_len % 8 != 0)
                         tabs++;
                     for (int i = 0; i < tabs; i++)
                         mx_printchar('\t');
