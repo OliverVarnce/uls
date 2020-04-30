@@ -6,7 +6,6 @@ void mx_dir_err(char *path) {
 
     mx_printerr("uls: ");
     perror(split[i-1]);
-    mx_printerr("\n");
     for (int j = 0; j < i; j++) {
         free(split[j]);
     }
