@@ -1,9 +1,13 @@
 #include "libmx.h"
 
-t_list  *mx_create_node(void *data) {
-	t_list *list = (t_list*)malloc(sizeof(t_list));
+t_list *mx_create_node(void *data) {
+    t_list *node = (t_list *)malloc(sizeof(t_list));
 
-	list->data = data;
-	list->next = NULL;
-	return list;
+    if (!node)
+        return NULL;
+
+    node->data = data;
+    node->next = NULL;
+
+    return node;
 }

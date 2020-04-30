@@ -1,42 +1,5 @@
 #include "uls.h"
 
-static char *short_time(time_t *t, t_flags *fl);
-static char *hex_minor (dev_t dev);
-static char *major_minor (dev_t dev);
-static char *get_time(t_dirlist *w, t_flags *fl);
-
-void mx_print_size_and_time(t_dirlist *w, t_flags *fl, t_col_size info) {
-    char *time_form = get_time(w, fl);
-
-    if (mx_get_file_type(w->stattemp->st_mode) == 'c'
-        || mx_get_file_type(w->stattemp->st_mode) == 'b') {
-        char *temp = major_minor(w->stattemp->st_rdev);
-
-        mx_printstr(temp);
-        mx_printchar(' ');
-        free(temp);
-    } 
-    else {
-        for (int i = info.col_four_size - mx_get_nums(w->stattemp->st_size);
-         i >= 0; i--)
-            mx_printchar(' ');
-        mx_printint(w->stattemp->st_size);
-        mx_printchar(' ');
-    }
-    mx_printstr(time_form);
-    mx_printchar(' ');
-    free(time_form);
-}
-
-static char *get_time(t_dirlist *w, t_flags *fl) {
-    if (fl->flag_u)
-        return short_time(&w->stattemp->st_atime, fl);
-    else if (fl->flag_c)
-        return short_time(&w->stattemp->st_ctime, fl);
-    else
-        return short_time(&w->stattemp->st_mtime, fl);
-}
-
 static char *short_time(time_t *t, t_flags *fl) {
     char *s;
 
@@ -67,7 +30,7 @@ static char *hex_minor(dev_t dev) {
             temp[i] = minor[j];
         free(minor);
         minor = temp;
-    } 
+    }
     else {
         minor = mx_itoa(MX_MINOR(dev));
     }
@@ -85,7 +48,7 @@ static char *major_minor(dev_t dev) {
     for (int len = mx_strlen(major), i = 4 - len, j = 0; j < len; i++, j++)
         joined_str[i] = major[j];
     for (int len = mx_strlen(minor), i = tot_len - len, j = 0;
-    j < len; i++, j++)
+         j < len; i++, j++)
         joined_str[i] = minor[j];
     if (malloc_size(minor) > 0)
         mx_strdel(&minor);
@@ -94,3 +57,34 @@ static char *major_minor(dev_t dev) {
     return joined_str;
 }
 
+static char *get_time(t_dirlist *w, t_flags *fl) {
+    if (fl->flag_u)
+        return short_time(&w->stattemp->st_atime, fl);
+    else if (fl->flag_c)
+        return short_time(&w->stattemp->st_ctime, fl);
+    else
+        return short_time(&w->stattemp->st_mtime, fl);
+}
+
+void mx_print_size_and_time(t_dirlist *w, t_flags *fl, t_col_size info) {
+    char *time_form = get_time(w, fl);
+
+    if (mx_get_file_type(w->stattemp->st_mode) == 'c'
+        || mx_get_file_type(w->stattemp->st_mode) == 'b') {
+        char *temp = major_minor(w->stattemp->st_rdev);
+
+        mx_printstr(temp);
+        mx_printchar(' ');
+        free(temp);
+    } 
+    else {
+        for (int i = info.col_four_size - mx_get_nums(w->stattemp->st_size);
+         i >= 0; i--)
+            mx_printchar(' ');
+        mx_printint(w->stattemp->st_size);
+        mx_printchar(' ');
+    }
+    mx_printstr(time_form);
+    mx_printchar(' ');
+    free(time_form);
+}

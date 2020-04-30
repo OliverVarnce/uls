@@ -1,34 +1,5 @@
 #include "uls.h"
 
-static void init_opts(t_flags *opts);
-static void check_arg(int argc, char *argv[], int i, int *is_error);
-static int read_arg(int argc, char *argv[], t_flags *fl);
-
-int main(int argc, char **argv) {
-    t_flags flag;
-    t_dirlist *file_list = NULL;
-    t_dirlist *dir_list = NULL;
-    int first_file_pos = 1;
-    int is_err = 0;
-
-    init_opts(&flag);
-    first_file_pos = read_arg(argc, argv, &flag);
-    check_arg(argc, argv, first_file_pos, &is_err);
-    if (first_file_pos == argc) {
-        mx_dir_parser(".", &flag, false, &is_err);
-        return is_err;
-    }
-    for (int i = first_file_pos; i < argc; i++)
-        mx_create_lists(argv[i], &file_list, &dir_list, &flag);
-    file_list = mx_sort_list_dir(file_list, &flag);
-    dir_list = mx_sort_list_dir(dir_list, &flag);
-    is_err = mx_constructor(file_list, dir_list, flag, argc - first_file_pos);
-
-    // system("leaks -q uls");
-
-    return is_err;
-}
-
 static void init_opts(t_flags *opts) {
     opts->flag_l = false;
     opts->flag_C = true;
@@ -64,7 +35,7 @@ static void check_arg(int argc, char **argv, int i, int *is_error) {
 
 static int read_arg(int argc, char **argv, t_flags *fl) {
     int pos = 1;
-    
+
     if (!isatty(STDOUT_FILENO)) {
         fl->flag_C = false;
         fl->flag_1 = true;
@@ -78,4 +49,25 @@ static int read_arg(int argc, char **argv, t_flags *fl) {
     return pos;
 }
 
+int main(int argc, char **argv) {
+    t_flags flag;
+    t_dirlist *file_list = NULL;
+    t_dirlist *dir_list = NULL;
+    int first_file_pos = 1;
+    int is_err = 0;
 
+    init_opts(&flag);
+    first_file_pos = read_arg(argc, argv, &flag);
+    check_arg(argc, argv, first_file_pos, &is_err);
+    if (first_file_pos == argc) {
+        mx_dir_parser(".", &flag, false, &is_err);
+        return is_err;
+    }
+    for (int i = first_file_pos; i < argc; i++)
+        mx_create_lists(argv[i], &file_list, &dir_list, &flag);
+    file_list = mx_sort_list_dir(file_list, &flag);
+    dir_list = mx_sort_list_dir(dir_list, &flag);
+    is_err = mx_constructor(file_list, dir_list, flag, argc - first_file_pos);
+
+    return is_err;
+}

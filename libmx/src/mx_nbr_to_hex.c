@@ -1,18 +1,18 @@
 #include "libmx.h"
 
 char *mx_nbr_to_hex(unsigned long nbr) {
-	unsigned long n = nbr;
-	int len = 1;
-	char *res;
+	int hex_num_len = 0;
+	char hex_digits[] = {'0', '1', '2', '3', '4', '5', '6'
+							, '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+	char buffer[16];
 
-	while (n / 16) {
-		len++;
-		n /= 16;
-	}
-	res = mx_strnew(len);
-	while (len--) {
-		res[len] = (nbr % 16 < 10) ? nbr % 16 + 48 : nbr % 16 + 87;
-		nbr /= 16;
-	}
-	return res;
+	if (nbr == 0) return "0";
+
+	for (unsigned long i = nbr; i > 0; i /= 16, hex_num_len++)
+		buffer[hex_num_len] = hex_digits[i%16];
+
+	for (int i = 0, j = hex_num_len - 1; i < j; i++, j--)
+		mx_swap_char(&buffer[i], &buffer[j]);
+
+	return mx_strncpy(mx_strnew(hex_num_len), buffer, hex_num_len);
 }

@@ -1,6 +1,19 @@
 #include "uls.h"
 
-static char *get_link(t_dirlist *node, t_flags *fl);
+char *get_link(t_dirlist *node, t_flags *fl) {
+    char temp[256];
+    char *res = NULL;
+
+    mx_memset(temp, '\0', 256);
+    if (fl->flag_G)
+        mx_set_color(node->d_name, PINK);
+    else
+        mx_printstr(node->d_name);
+    mx_printstr(" -> ");
+    readlink(node->path, temp, 256);
+    mx_printstr(temp);
+    return res;
+}
 
 void mx_print_name_or_link(t_dirlist *w, t_flags *fl){
     char *link = NULL;
@@ -15,19 +28,4 @@ void mx_print_name_or_link(t_dirlist *w, t_flags *fl){
         : mx_printstr(w->d_name);
     }
     mx_printchar('\n');
-}
-
-static char *get_link(t_dirlist *node, t_flags *fl) {
-    char temp[256];
-    char *res = NULL;
-
-    mx_memset(temp, '\0', 256);
-    if (fl->flag_G)
-        mx_set_color(node->d_name, PINK);
-    else
-        mx_printstr(node->d_name); 
-    mx_printstr(" -> ");
-    readlink(node->path, temp, 256);
-    mx_printstr(temp);
-    return res;
 }
