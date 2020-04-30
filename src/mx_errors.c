@@ -23,7 +23,7 @@ void mx_print_error(char *path, int error_no, bool print_header) {
 
 bool mx_is_valid_flag(char *s) {
     bool res;
-    static const char *all_flags = "lC1aAGrRTngucSt";
+    static const char *all_flags = MX_VALID_FLG;
 
     while (*s) {
         res = false;

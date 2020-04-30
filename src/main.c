@@ -1,6 +1,6 @@
 #include "uls.h"
 
-static void init_opts(t_flags *opts) {
+void init_opts(t_flags *opts) {
     opts->flag_l = false;
     opts->flag_C = true;
     opts->flag_1 = false;
@@ -18,7 +18,7 @@ static void init_opts(t_flags *opts) {
     opts->flag_t = false;
 }
 
-static void check_arg(int argc, char **argv, int i, int *is_error) {
+void check_arg(int argc, char **argv, int i, int *is_error) {
     struct stat sb;
     t_list *bad_list = NULL;
 
@@ -68,6 +68,8 @@ int main(int argc, char **argv) {
     file_list = mx_sort_list_dir(file_list, &flag);
     dir_list = mx_sort_list_dir(dir_list, &flag);
     is_err = mx_constructor(file_list, dir_list, flag, argc - first_file_pos);
+
+    system("leaks -q uls");
 
     return is_err;
 }

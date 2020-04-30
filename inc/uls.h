@@ -5,6 +5,7 @@
 #define MX_MINORMASK ((1U << MX_MINORBITS) - 1)
 #define MX_MAJOR(dev) ((unsigned int) ((dev) >> MX_MINORBITS))
 #define MX_MINOR(dev) ((unsigned int) ((dev) & MX_MINORMASK))
+#define MX_VALID_FLG "ACGRSTacfglnrtu1"
 
 #define RED  "\33[31m"
 #define YELLOW  "\33[33m"
@@ -40,21 +41,22 @@ typedef struct s_list_dir {
 } t_dirlist;
 
 typedef struct s_flags {
-    bool flag_l;
-    bool flag_C;
-    bool flag_1;
-    bool flag_a;
     bool flag_A;
+    bool flag_C;
     bool flag_G;
-    bool flag_r;
     bool flag_R;
-    bool flag_T;
-    bool flag_n;
-    bool flag_g;
-    bool flag_u;
-    bool flag_c;
     bool flag_S;
+    bool flag_T;
+    bool flag_a;
+    bool flag_c;
+    bool flag_f;
+    bool flag_g;
+    bool flag_l;
+    bool flag_n;
+    bool flag_r;
     bool flag_t;
+    bool flag_u;
+    bool flag_1;
 } t_flags;
 
 typedef struct s_column_size {

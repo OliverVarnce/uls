@@ -15,6 +15,9 @@ void check_output_flags(t_flags *opts, char *flags) {
                 opts->flag_C = false;
                 opts->flag_l = false;
                 break;
+            case 'f': opts->flag_f = true;
+                opts->flag_a = true;
+                break;
             case 'r': opts->flag_r = true;
                 break;
         }
@@ -91,7 +94,7 @@ t_flags *mx_get_flags(t_flags *flag, char *flags) {
             flag->flag_G = false;
     }
     else {
-        mx_printerr("usage: uls [-lC1aAGrRTngucSt] [file ...]\n");
+        mx_printerr("usage: uls [-ACGRSTacfglnrtu1] [file ...]\n");
         exit(1);
     }
     return flag;
