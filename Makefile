@@ -29,7 +29,7 @@ SRC   = mx_create_node_dir \
 		mx_other \
 		main \
 		mx_make_table \
-		mx_create_lists \
+		mx_create_lists
 
 SRCS = $(addsuffix .c, $(SRC))
 
