@@ -3,18 +3,23 @@ NAME = uls
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 
 SRC   = mx_create_node_dir \
+        mx_input_arg \
 		mx_sortbysize \
 		mx_sortbylexic \
 		mx_sortbytmod \
+        mx_out_no_file \
 		mx_dirlist_del \
 		mx_dirlist_out \
 		mx_errors \
+		mx_init_opts \
 		mx_get_file_type \
 		mx_list_size_dir \
 		mx_out_1 \
 		mx_out_G \
 		mx_print_table \
 		mx_out_l \
+		mx_out_F \
+		mx_else_FG \
 		mx_print_reg \
 		mx_push_back_dir \
 		mx_push_front_dir \
@@ -26,7 +31,7 @@ SRC   = mx_create_node_dir \
 		mx_print_uid_gid \
 		mx_get_nums \
 		mx_print_name_or_link \
-		mx_other \
+		mx_comparator \
 		main \
 		mx_make_table \
 		mx_create_lists

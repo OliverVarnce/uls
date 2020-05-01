@@ -38,6 +38,8 @@ void check_info_flag(t_flags *opts, char *flags) {
                 break;
             case 'R': opts->flag_R = true;
                 break;
+            case 'F': opts->flag_F = true;
+                break;
             case 'S': opts->flag_S = true;
                 break;
             case 't':
@@ -94,7 +96,9 @@ t_flags *mx_get_flags(t_flags *flag, char *flags) {
             flag->flag_G = false;
     }
     else {
-        mx_printerr("usage: uls [-ACGRSTacfglnrtu1] [file ...]\n");
+        mx_printerr("usage: uls [-");
+        mx_printerr(LS_VALID_FLG);
+        mx_printerr("] [file ...]\n");
         exit(1);
     }
     return flag;

@@ -26,7 +26,6 @@ void mx_print_table(t_dirlist *head, t_flags *opts) {
     int items = mx_list_size_dir(head, &col_width);
     t_table_info table;
     struct winsize w;
-    const size_t static_win_size = 80;
     
     table.cols = items;
     table.rows = 1;
@@ -34,10 +33,10 @@ void mx_print_table(t_dirlist *head, t_flags *opts) {
         return;
     ioctl(0, TIOCGWINSZ, &w);
 
-    col_width = (opts->flag_G ? col_width
-    : col_width + 8 - col_width % 8);
+    col_width = opts->flag_G ? col_width
+    : col_width + 8 - col_width % 8;
 
-    get_rc_num(items, (isatty(STDOUT_FILENO) ? w.ws_col : static_win_size),
+    get_rc_num(items, (isatty(STDOUT_FILENO) ? w.ws_col : LS_STATIC_WIN_SIZE),
     col_width, &table);
     mx_make_table(head, table, col_width, opts);
 }

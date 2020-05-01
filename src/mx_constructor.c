@@ -20,13 +20,14 @@ static t_dirlist *make_dir_list(char *path, t_dirlist *list,
     return list;
 }
 
-static void print_selector(t_dirlist *file_list, t_flags flag){
-    if (flag.flag_l)
-        mx_out_l(file_list, &flag, false);
-    else if (flag.flag_1 || (!isatty(STDOUT_FILENO) && !flag.flag_C))
-        mx_out_1(file_list, &flag);
-    else
-        mx_print_table(file_list, &flag);
+int mx_check_null_flg(int first_file_pos, int argc, t_flags flag) {
+    int is_err = 0;
+
+    if (first_file_pos == argc) {
+        mx_dir_parser(".", &flag, false, &is_err);
+    }
+
+    return is_err;
 }
 
 void mx_dir_parser(char *path, t_flags *opts, bool print_header, int *is_err) {
@@ -52,13 +53,23 @@ void mx_dir_parser(char *path, t_flags *opts, bool print_header, int *is_err) {
     mx_dirlist_del(&list);
 }
 
+
+void mx_print_selector(t_dirlist *file_list, t_flags flag){
+    if (flag.flag_l)
+        mx_out_l(file_list, &flag, false);
+    else if (flag.flag_1 || (!isatty(STDOUT_FILENO) && !flag.flag_C))
+        mx_out_1(file_list, &flag);
+    else
+        mx_print_table(file_list, &flag);
+}
+
 int mx_constructor(t_dirlist *file_list,
                    t_dirlist *dir_list, t_flags flag, int files_cnt) {
     int is_err = 0;
 
     file_list = mx_sort_list_dir(file_list, &flag);
     dir_list = mx_sort_list_dir(dir_list, &flag);
-    print_selector(file_list, flag);
+    mx_print_selector(file_list, flag);
     for (t_dirlist *w = dir_list; w != NULL; w = w->next) {
         if (dir_list->next == NULL && file_list == NULL && files_cnt == 1)
             mx_dir_parser(w->path, &flag, false, &is_err);

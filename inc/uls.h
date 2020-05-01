@@ -1,11 +1,16 @@
 #ifndef ULS_H
 #define ULS_H
 
+#define LS_VALID_FLG "ACFGRSTacfglnrtu1"
+#define LS_VALID_STR_ONE "uls: illegal option -- "
+#define LS_STATIC_WIN_SIZE 80
+#define LS_FUNC_NAME "uls"
+
 #define MX_MINORBITS 24
 #define MX_MINORMASK ((1U << MX_MINORBITS) - 1)
 #define MX_MAJOR(dev) ((unsigned int) ((dev) >> MX_MINORBITS))
 #define MX_MINOR(dev) ((unsigned int) ((dev) & MX_MINORMASK))
-#define MX_VALID_FLG "ACFGRSTacfglnrtu1"
+
 
 #define RED  "\33[31m"
 #define YELLOW  "\33[33m"
@@ -43,6 +48,7 @@ typedef struct s_list_dir {
 typedef struct s_flags {
     bool flag_A;
     bool flag_C;
+    bool flag_F;
     bool flag_G;
     bool flag_R;
     bool flag_S;
@@ -87,14 +93,22 @@ typedef void (*fptr)(t_dirlist *first, t_dirlist *second, t_flags *opts);
 t_dirlist *mx_create_node_dir(const char *d_name, const char *path);
 void mx_push_front_dir(t_dirlist **list, const char *d_name,
                        const char *path);
+void mx_init_opts(t_flags *opts);
+int mx_check_null_flg(int first_file_pos, int argc, t_flags flag);
+void mx_check_arg(int argc, char **argv, int i, int *is_error);
+int mx_read_arg(int argc, char **argv, t_flags *fl);
 void mx_create_lists(char *argv, t_dirlist **f_list, t_dirlist **d_list, t_flags *fl);
 void mx_push_back_dir(t_dirlist **list, const char *d_name, const char *path);
 int mx_list_size_dir(t_dirlist *list, int *max_len);
 void mx_dirlist_del(t_dirlist **head);
 t_dirlist *mx_sort_list_dir(t_dirlist *lst, t_flags *opts);
 char mx_get_file_type(mode_t val);
+void mx_print_table_FG (t_flags *opts, int col_width,
+                        int str_len, int tabs);
 void mx_print_table(t_dirlist *head, t_flags *opts);
 void mx_out_l(t_dirlist *lst, t_flags *fl, bool pr_total);
+void mx_out_F(char *name, mode_t val);
+void mx_else_FG (t_flags *opts, t_node **arr, int i, int j);
 void mx_set_color(char *name, char *col);
 void mx_out_G(char *name, mode_t val);
 void mx_out_1(t_dirlist *head, t_flags *opts);
@@ -116,12 +130,13 @@ void mx_sortbytmod_asc(t_dirlist *first, t_dirlist *second, t_flags *opts);
 void mx_swap(t_dirlist *first, t_dirlist *second);
 struct timespec mx_get_time_type(t_dirlist *node, t_flags *opts);
 int mx_get_nums(int num);
+int mx_special_calc(t_node **arr, t_table_info table);
 void mx_print_perm_and_link(t_dirlist *w, t_col_size info);
 void mx_print_size_and_time(t_dirlist *w, t_flags *fl, t_col_size info);
 void mx_print_uid_gid(t_dirlist *w, t_flags *fl, t_col_size info);
 void mx_print_name_or_link(t_dirlist *w, t_flags *fl);
 void mx_err_dir(char *path);
-void mx_print_bad_list(t_list *lst);
+void mx_out_no_file(t_list *lst);
 bool mx_cmp(void *s1, void *s2);
 void mx_print_error(char *path, int error_no, bool print_header);
 bool mx_is_valid_flag(char *s);

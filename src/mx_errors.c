@@ -4,7 +4,7 @@ void mx_dir_err(char *path) {
     char **split = mx_strsplit(path, '/');
     int i = mx_count_words(path, '/');
 
-    mx_printerr("uls: ");
+    mx_printerr(LS_FUNC_NAME);
     perror(split[i-1]);
     for (int j = 0; j < i; j++) {
         free(split[j]);
@@ -23,7 +23,7 @@ void mx_print_error(char *path, int error_no, bool print_header) {
 
 bool mx_is_valid_flag(char *s) {
     bool res;
-    static const char *all_flags = MX_VALID_FLG;
+    static const char *all_flags = LS_VALID_FLG;
 
     while (*s) {
         res = false;
@@ -32,8 +32,8 @@ bool mx_is_valid_flag(char *s) {
                 res = true;
         }
         if (res == false) {
-            mx_printerr("uls: illegal option -- ");
-            write(2, s, 1);
+            mx_printerr(LS_VALID_STR_ONE);
+            mx_printerr(s);
             mx_printerr("\n");
             return false;
         }

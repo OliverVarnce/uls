@@ -28,22 +28,20 @@ static void fill_table(t_dirlist *head, t_node **arr, int rows) {
 
 static void print_table(t_node **arr, t_table_info table, int col_width,
                  t_flags *opts) {
+    int str_len = 0;
+    int tabs = 0;
     for (int i = 0; i < table.rows; i++) {
         for (int j = 0; j < table.cols; j++)
             if (arr[i][j].ptr != NULL) {
-                opts->flag_G ?
-                mx_out_G(arr[i][j].ptr->d_name,
-                         arr[i][j].ptr->stattemp->st_mode) :
-                mx_printstr(arr[i][j].ptr->d_name);
+                mx_else_FG (opts, arr, i, j);
                 if (j != table.cols - 1
                     && !(j == table.cols - 2 && arr[i][j+1].ptr == NULL)) {
-                    int str_len = mx_strlen(arr[i][j].ptr->d_name);
-                    int tabs = (col_width - str_len) / 8;
-
+                    //чтоб красиво отрисовывало
+                    str_len = mx_strlen(arr[i][j].ptr->d_name);
+                    tabs = (col_width - str_len) / 8;
                     if (str_len % 8 != 0)
                         tabs++;
-                    for (int i = 0; i < tabs; i++)
-                        mx_printchar('\t');
+                    mx_print_table_FG(opts, col_width, str_len, tabs);
                 }
             }
         mx_printchar('\n');
