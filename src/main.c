@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
         mx_create_lists(argv[i], &file_list, &dir_list, &flag);
     file_list = mx_sort_list_dir(file_list, &flag);
     dir_list = mx_sort_list_dir(dir_list, &flag);
-    system("leaks -q uls");
+    // system("leaks -q uls");
     is_err = mx_constructor(file_list, dir_list, flag, argc - first_file_pos);
 
     return is_err;
