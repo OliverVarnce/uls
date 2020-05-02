@@ -36,6 +36,7 @@
 #include <time.h>
 #include <grp.h>
 #include <pwd.h>
+#include <sys/acl.h>
 #include <sys/errno.h>
 
 typedef struct s_list_dir {
@@ -144,5 +145,4 @@ void mx_make_table(t_dirlist *head, t_table_info table, int col_width,
 void mx_dirlist_out(t_dirlist *list, t_flags *opts);
 void mx_print_reg(char *name, mode_t val);
 void mx_check_perm(char *name, mode_t val);
-
 #endif

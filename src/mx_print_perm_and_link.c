@@ -15,23 +15,26 @@ void mx_print_perm_and_link(t_dirlist *w, t_col_size info) {
     mx_printchar(' ');
 }
 
-static void print_perm_type(mode_t val) {
-    val & 0x100 ? mx_printchar('r') : mx_printchar('-');
-    val & 0x080 ? mx_printchar('w') : mx_printchar('-');
-    val & 0x040 ? (val & 0x800 ? mx_printchar('s') : mx_printchar('x'))
-    : (val & 0x800 ? mx_printchar('S') : mx_printchar('-'));
-    val & 0x020 ? mx_printchar('r') : mx_printchar('-');
-    val & 0x010 ? mx_printchar('w') : mx_printchar('-');
-    val & 0x008 ? (val & 0x400 ? mx_printchar('s') : mx_printchar('x'))
-    : (val & 0x400 ? mx_printchar('S') : mx_printchar('-'));
-    val & 0x004 ? mx_printchar('r') : mx_printchar('-');
-    val & 0x002 ? mx_printchar('w') : mx_printchar('-');
-    val & 0x001 ? (val & 0x200 ? mx_printchar('t') : mx_printchar('x'))
-    : (val & 0x200 ? mx_printchar('T') : mx_printchar('-'));
+void print_perm_type(mode_t val) {
+    S_IRUSR == (S_IRUSR & val) ? mx_printchar('r') : mx_printchar('-');
+    S_IWUSR == (S_IWUSR & val) ? mx_printchar('w') : mx_printchar('-');
+    S_IXUSR == (S_IXUSR & val) ? (val & 0x800 ? mx_printchar('s')
+                : mx_printchar('x'))
+                : (val & 0x800 ? mx_printchar('S') : mx_printchar('-'));
+    S_IRGRP == (S_IRGRP & val) ? mx_printchar('r') : mx_printchar('-');
+    S_IWGRP == (S_IWGRP & val) ? mx_printchar('w') : mx_printchar('-');
+    S_IXGRP == (S_IXGRP & val) ? (val & 0x400 ? mx_printchar('s')
+                : mx_printchar('x'))
+                : (val & 0x400 ? mx_printchar('S') : mx_printchar('-'));
+    S_IROTH == (S_IROTH & val) ? mx_printchar('r') : mx_printchar('-');
+    S_IWOTH == (S_IWOTH & val) ? mx_printchar('w') : mx_printchar('-');
+    S_IXOTH == (S_IXOTH & val) ? (val & 0x200 ? mx_printchar('t')
+                : mx_printchar('x'))
+                : (val & 0x200 ? mx_printchar('T') : mx_printchar('-'));
 }
 
 static char return_acl(char *filename) {
-    acl_t acl = acl_get_file(filename, ACL_TYPE_EXTENDED);
+        acl_t acl = acl_get_file(filename, ACL_TYPE_EXTENDED);
     
     if (listxattr(filename, NULL, 0, XATTR_NOFOLLOW) > 0) {
         acl_free(acl);

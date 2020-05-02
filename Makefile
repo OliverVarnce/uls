@@ -49,6 +49,7 @@ all: install clean
 install:
 	@make -f Makefile install --directory=libmx
 	@mkdir obj
+	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
 	@cp $(addprefix src/, $(SRCS)) .
 	@cp $(addprefix inc/, $(INC)) .
 	@clang $(CFLAGS) -c $(SRCS) -I $(INC)
@@ -64,5 +65,5 @@ clean:
 	@rm -rf $(INC)
 	@rm -rf $(addsuffix .o, $(SRC))
 	@rm -rf ./obj
-	
+
 reinstall: uninstall install

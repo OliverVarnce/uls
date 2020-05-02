@@ -1,21 +1,5 @@
 #include "uls.h"
 
-static fptr factory(t_flags *opts);
-
-t_dirlist *mx_sort_list_dir(t_dirlist *lst, t_flags *opts) {
-    fptr mx_cmp; 
-
-    if (!lst || !opts)
-        return NULL;
-    mx_cmp = factory(opts);
-    for (t_dirlist *i = lst; i != NULL; i = i->next) {
-        for (t_dirlist *j = i->next; j != NULL; j = j->next) {
-            mx_cmp(i, j, opts);
-        }
-    }
-    return lst;
-}
-
 static fptr factory(t_flags *opts) {
     if (opts->flag_r) {
         if (opts->flag_S)
@@ -31,6 +15,23 @@ static fptr factory(t_flags *opts) {
             return mx_sortbytmod_asc;
         return mx_sortbylexic_asc;
     }
+}
+
+t_dirlist *mx_sort_list_dir(t_dirlist *lst, t_flags *opts) {
+    fptr mx_cmp; 
+
+    if (!lst || !opts)
+        return NULL;
+        mx_cmp = factory(opts);
+    for (t_dirlist *i = lst; i != NULL; i = i->next) {
+        for (t_dirlist *j = i->next; j != NULL; j = j->next) {
+            if (opts->flag_f){
+                return lst;
+            }
+            mx_cmp(i, j, opts);
+        }
+    }
+    return lst;
 }
 
 void mx_swap(t_dirlist *first, t_dirlist *second) {
