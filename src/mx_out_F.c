@@ -7,7 +7,7 @@ void mx_set_sym(char *name, char *sym) {
 
 void mx_check_perm(char *name, mode_t val) {
     val & 0x001 ? (val & 0x100 ? mx_set_sym(name, "*") :
-    mx_set_sym(name, " ")) : mx_set_sym(name, " ");
+    mx_set_sym(name, "")) : mx_set_sym(name, "");
 }
 
 void mx_out_F(char *name, mode_t val) {

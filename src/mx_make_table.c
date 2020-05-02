@@ -36,11 +36,10 @@ static void print_table(t_node **arr, t_table_info table, int col_width,
                 mx_else_FG (opts, arr, i, j);
                 if (j != table.cols - 1
                     && !(j == table.cols - 2 && arr[i][j+1].ptr == NULL)) {
-                    //чтоб красиво отрисовывало
-                    str_len = mx_strlen(arr[i][j].ptr->d_name);
+                        str_len = mx_strlen(arr[i][j].ptr->d_name);
+                    if (opts->flag_F)
+                        str_len +=  1;
                     tabs = (col_width - str_len) / 8;
-                    if (str_len % 8 != 0)
-                        tabs++;
                     mx_print_table_FG(opts, col_width, str_len, tabs);
                 }
             }

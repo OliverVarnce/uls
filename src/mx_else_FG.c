@@ -2,18 +2,16 @@
 
 void mx_print_table_FG (t_flags *opts, int col_width,
                             int str_len, int tabs) {
-        if (opts->flag_G) {
-            for (int z = 0; z <= (col_width - str_len); z++)
-                mx_printchar(' ');
-        }
-        else if (opts->flag_F) {
-            for (int z = 0; z <= (col_width - (str_len + 2)); z++)
-                mx_printchar(' ');
-        }
-        else {
-            for (int i = 0; i < tabs; i++)
-                mx_printchar('\t');
-        }
+    if (str_len % 8 != 0)
+        tabs++;
+    if (opts->flag_G) {
+        for (int z = 0; z <= (col_width - str_len); z++)
+            mx_printchar(' ');
+    }
+    else {
+        for (int i = 0; i < tabs; i++)
+            mx_printchar('\t');
+    }
 }
 
 void mx_else_FG (t_flags *opts, t_node **arr, int i, int j) {
