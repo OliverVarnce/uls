@@ -1,69 +1,87 @@
-NAME = uls
+NAME	=	uls
 
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
+CFLG	=	-std=c11 $(addprefix -W, all extra error pedantic)
 
-SRC   = mx_create_node_dir \
-        mx_input_arg \
-		mx_sortbysize \
-		mx_sortbylexic \
-		mx_sortbytmod \
-        mx_out_no_file \
-		mx_dirlist_del \
-		mx_dirlist_out \
-		mx_errors \
-		mx_init_opts \
-		mx_get_file_type \
-		mx_list_size_dir \
-		mx_out_1 \
-		mx_out_G \
-		mx_print_table \
-		mx_out_l \
-		mx_out_F \
-		mx_else_FG \
-		mx_print_reg \
-		mx_push_back_dir \
-		mx_push_front_dir \
-		mx_sort_list_dir \
-		mx_constructor \
-		mx_get_flags \
-		mx_print_perm_and_link \
-		mx_print_size_and_time \
-		mx_print_uid_gid \
-		mx_get_nums \
-		mx_print_name_or_link \
-		mx_comparator \
-		main \
-		mx_make_table \
-		mx_create_lists
+SRCD	=	src
+INCD	=	inc
+OBJD	=	obj
 
-SRCS = $(addsuffix .c, $(SRC))
+LMXD	=	libmx
+LMXA:=	$(LMXD)/libmx.a
+LMXI:=	$(LMXD)/$(INCD)
 
-OBJO = $(SRCS:.c=.o)
+INC		=	uls.h
+INCS	=	$(addprefix $(INCD)/, $(INC))
 
-INC = uls.h
+SRC     =   main.c \
+            mx_else_FG.c \
+            mx_list_size_dir.c \
+            mx_print_name_or_link.c \
+            mx_push_front_dir.c \
+            mx_comparator.c \
+            mx_errors.c \
+            mx_make_table.c \
+            mx_print_perm_and_link.c \
+            mx_sort_list_dir.c \
+            mx_constructor.c \
+            mx_get_file_type.c \
+            mx_out_1.c \
+            mx_print_reg.c \
+            mx_sortbylexic.c \
+            mx_create_lists.c \
+            mx_get_flags.c \
+            mx_out_F.c \
+            mx_print_size_and_time.c \
+            mx_sortbysize.c \
+            mx_create_node_dir.c \
+            mx_get_nums.c \
+            mx_out_G.c \
+            mx_print_table.c \
+            mx_sortbytmod.c \
+            mx_dirlist_del.c \
+            mx_init_opts.c \
+            mx_out_l.c \
+            mx_print_uid_gid.c \
+            mx_dirlist_out.c \
+            mx_input_arg.c \
+            mx_out_no_file.c \
+            mx_push_back_dir.c
 
-LIBAR = libmx/libmx.a
+SRCS	=	$(addprefix $(SRCD)/, $(SRC))
+OBJS	=	$(addprefix $(OBJD)/, $(SRC:%.c=%.o))
 
-all: install clean
+all: $(LMXD) $(NAME)
 
-install:
-	@make -f Makefile install --directory=libmx
-	@mkdir obj
+$(FILE:a/%=%)
+
+#install: $(LMXA) $(NAME)
+
+$(NAME): $(LMXA) $(OBJS)
+	@clang $(CFLG) $(OBJS) -L$(LMXD) -lmx -o $@
 	@printf "\r\33[2K$@ \033[32;1mcreated\033[0m\n"
-	@cp $(addprefix src/, $(SRCS)) .
-	@cp $(addprefix inc/, $(INC)) .
-	@clang $(CFLAGS) -c $(SRCS) -I $(INC)
-	@clang $(CFLGS) $(OBJO) $(LIBAR) -o $(NAME) -I $(LIBAR)
 
-uninstall: clean
-	@rm -rf $(NAME)
-	@make -f Makefile uninstall --directory=libmx
+$(OBJD)/%.o: $(SRCD)/%.c $(INCS)
+	@clang $(CFLG) -c $< -o $@ -I$(INCD) -I$(LMXI)
+	@printf "\r\33[2K$(NAME) \033[33;1mcompile \033[0m$(<:$(SRCD)/%.c=%) "
+
+$(OBJS): | $(OBJD)
+
+$(OBJD):
+	@mkdir -p $@
+
+$(LMXD): $(LMXA)
+
+$(LMXA):
+	@make -sC $(LMXD)
 
 clean:
-	@make -f Makefile clean --directory=libmx
-	@rm -rf $(SRCS)
-	@rm -rf $(INC)
-	@rm -rf $(addsuffix .o, $(SRC))
-	@rm -rf ./obj
+	@make -sC $(LMXD) $@
+	@rm -rf $(OBJD)
+	@printf "$(OBJD)\t   \033[31;1mdeleted\033[0m\n"
 
-reinstall: uninstall install
+uninstall: clean
+	@make -sC $(LMXD) $@
+	@rm -rf $(NAME)
+	@printf "$(NAME) \033[31;1muninstalled\033[0m\n"
+
+reinstall: uninstall all

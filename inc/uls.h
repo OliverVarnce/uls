@@ -26,7 +26,7 @@
 #define YELLOW_BLACK "\33[43m\33[30m"
 #define COLOR_DEFAULT  "\33[0m"
 
-#include "./libmx/inc/libmx.h"
+#include "libmx.h"
 #include <dirent.h>
 #include <sys/types.h>
 #include <sys/stat.h>
