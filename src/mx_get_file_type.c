@@ -20,3 +20,12 @@ char mx_get_file_type(mode_t val) {
             return '?'; // unknown
     }
 }
+
+char mx_get_file_perm(mode_t val) {
+    switch (val & 0x001) {
+        case 0x200:
+            return '-'; // noexec
+        default:
+            return 'x'; // executable
+    }
+}

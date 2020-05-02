@@ -23,7 +23,7 @@ static fptr factory(t_flags *opts) {
         if (opts->flag_t)
             return mx_sortbytmod_desc;
         return mx_sortbylexic_desc;
-    } 
+    }
     else {
         if (opts->flag_S)
             return mx_sortbysize_asc;

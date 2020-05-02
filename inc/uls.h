@@ -135,7 +135,6 @@ void mx_print_perm_and_link(t_dirlist *w, t_col_size info);
 void mx_print_size_and_time(t_dirlist *w, t_flags *fl, t_col_size info);
 void mx_print_uid_gid(t_dirlist *w, t_flags *fl, t_col_size info);
 void mx_print_name_or_link(t_dirlist *w, t_flags *fl);
-void mx_err_dir(char *path);
 void mx_out_no_file(t_list *lst);
 bool mx_cmp(void *s1, void *s2);
 void mx_print_error(char *path, int error_no, bool print_header);
@@ -144,5 +143,6 @@ void mx_make_table(t_dirlist *head, t_table_info table, int col_width,
                    t_flags *opts);
 void mx_dirlist_out(t_dirlist *list, t_flags *opts);
 void mx_print_reg(char *name, mode_t val);
+void mx_check_perm(char *name, mode_t val);
 
 #endif
