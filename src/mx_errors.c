@@ -6,9 +6,10 @@ void mx_dir_err(char *path) {
 
     mx_printerr(LS_FUNC_NAME);
     perror(split[i-1]);
-    for (int j = 0; j < i; j++) {
+
+    for (int j = 0; j < i; j++)
         free(split[j]);
-    }
+
     free(split);
 }
 
@@ -28,9 +29,10 @@ bool mx_is_valid_flag(char *s) {
     while (*s) {
         res = false;
         for (int i = 0, j = mx_strlen(all_flags); i < j; i++) {
-            if(*s == all_flags[i])
+            if (*s == all_flags[i])
                 res = true;
         }
+
         if (res == false) {
             mx_printerr(LS_VALID_STR_ONE);
             mx_printerr(s);

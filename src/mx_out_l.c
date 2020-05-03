@@ -15,7 +15,8 @@ static void init_cur_info(t_col_size *temp, t_dirlist *w, t_flags *fl) {
     if (fl->flag_n)
         temp->cur_col_three_size = mx_get_nums(w->stattemp->st_gid);
     else
-        temp->cur_col_three_size = (temp->gr != NULL ? mx_strlen(temp->gr->gr_name)
+        temp->cur_col_three_size = (temp->gr != NULL
+                ? mx_strlen(temp->gr->gr_name)
                 : mx_get_nums(w->stattemp->st_gid));
     if (mx_get_file_type(w->stattemp->st_mode) == 'c'
         || mx_get_file_type(w->stattemp->st_mode) == 'b')
@@ -61,6 +62,7 @@ void mx_out_l(t_dirlist *lst, t_flags *fl, bool pr_total) {
         mx_printint(info.total_size);
         mx_printchar('\n');
     }
+
     for (t_dirlist *w = lst; w != NULL; w = w->next) {
         info.pw = getpwuid(w->stattemp->st_uid);
         info.gr = getgrgid(w->stattemp->st_gid);
