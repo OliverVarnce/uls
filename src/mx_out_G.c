@@ -1,8 +1,8 @@
 #include "uls.h"
 
 void mx_print_dir(char *name, mode_t val){
-    if((val & 0x002) &&((val & 0x001 && val & 0x200)
-                          || (val & 0x001 && val & 0x200)))
+    if((val & 0x002) && ((val & 0x001 && val & 0x200)
+    || (val & 0x001 && val & 0x200)))
         mx_set_color(name, GREEN_BLACK);
     else if(val & 0x002 && (val & 0x001 && !(val & 0x200)))
         mx_set_color(name, YELLOW_BLACK);
@@ -35,4 +35,3 @@ void mx_out_G(char *name, mode_t val) {
         default: mx_printstr(name);
     }
 }
-

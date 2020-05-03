@@ -35,7 +35,7 @@ void print_perm_type(mode_t val) {
 
 static char return_acl(char *filename) {
         acl_t acl = acl_get_file(filename, ACL_TYPE_EXTENDED);
-    
+
     if (listxattr(filename, NULL, 0, XATTR_NOFOLLOW) > 0) {
         acl_free(acl);
         return '@';

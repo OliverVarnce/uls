@@ -1,7 +1,6 @@
 #include "uls.h"
 
-void get_rc_num(int items, int win_width, int col_width,
-                t_table_info *table) {
+void get_rc_num(int items, int win_width, int col_width, t_table_info *table) {
     int tot_width = items * col_width;
 
     if (col_width < win_width) {
@@ -33,8 +32,7 @@ void mx_print_table(t_dirlist *head, t_flags *opts) {
         return;
     ioctl(0, TIOCGWINSZ, &w);
 
-    col_width = opts->flag_G ? col_width
-    : col_width + 8 - col_width % 8;
+    col_width = opts->flag_G ? col_width : col_width + 8 - col_width % 8;
 
     get_rc_num(items, (isatty(STDOUT_FILENO) ? w.ws_col : LS_STATIC_WIN_SIZE),
     col_width, &table);

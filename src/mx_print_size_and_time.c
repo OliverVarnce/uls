@@ -3,9 +3,8 @@
 static char *short_time(time_t *t, t_flags *fl) {
     char *s;
 
-    if (fl->flag_T){
+    if (fl->flag_T)
         s = mx_strndup((ctime)(t) + 4, 20);
-    }
     else {
         if ((time(0) - *t) < 15768000 && (time(0) - *t) >= 0)
             s = mx_strndup((ctime)(t) + 4, 12);
@@ -14,6 +13,7 @@ static char *short_time(time_t *t, t_flags *fl) {
             s = mx_strncat(s, ((ctime)(t) + 19), 5);
         }
     }
+
     return s;
 }
 
@@ -26,14 +26,16 @@ static char *hex_minor(dev_t dev) {
         temp = mx_strnew(10);
         mx_memset(temp, '0', 10);
         temp[1] = 'x';
+
         for (int i = 10 - mx_strlen(minor), j = 0; i < 10; i++, j++)
             temp[i] = minor[j];
+
         free(minor);
         minor = temp;
     }
-    else {
+    else
         minor = mx_itoa(MX_MINOR(dev));
-    }
+
     return minor;
 }
 
@@ -54,6 +56,7 @@ static char *major_minor(dev_t dev) {
         mx_strdel(&minor);
     if (malloc_size(major) > 0)
         mx_strdel(&major);
+
     return joined_str;
 }
 
