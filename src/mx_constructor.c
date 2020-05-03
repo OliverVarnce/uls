@@ -55,7 +55,6 @@ void mx_dir_parser(char *path, t_flags *opts, bool print_header, int *is_err) {
     mx_dirlist_del(&list);
 }
 
-
 void mx_print_selector(t_dirlist *file_list, t_flags flag) {
     if (flag.flag_l)
         mx_out_l(file_list, &flag, false);
