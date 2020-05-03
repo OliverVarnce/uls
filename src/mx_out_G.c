@@ -35,4 +35,3 @@ void mx_out_G(char *name, mode_t val) {
         default: mx_printstr(name);
     }
 }
-
