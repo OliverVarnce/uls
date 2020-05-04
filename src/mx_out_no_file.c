@@ -7,6 +7,6 @@ void mx_out_no_file(t_list *lst) {
         mx_printerr(": No such file or directory");
         mx_printerr("\n");
         lst = lst->next;
-        exit(1);
     }
+    exit(1);
 }

@@ -1,9 +1,9 @@
 #include "uls.h"
 
-void mx_print_table_FG (t_flags *opts, int col_width, int str_len, int tabs) {
+void mx_print_table_FG (t_flags *opts, int col_width,
+                            int str_len, int tabs) {
     if (str_len % 8 != 0)
         tabs++;
-
     if (opts->flag_G) {
         for (int z = 0; z <= (col_width - str_len); z++)
             mx_printchar(' ');
@@ -23,6 +23,7 @@ void mx_else_FG (t_flags *opts, t_node **arr, int i, int j) {
         mx_out_F(arr[i][j].ptr->d_name,
                  arr[i][j].ptr->stattemp->st_mode);
     }
-    else
+    else {
         mx_printstr(arr[i][j].ptr->d_name);
+    }
 }

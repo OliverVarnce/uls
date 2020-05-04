@@ -9,11 +9,9 @@ char *get_link(t_dirlist *node, t_flags *fl) {
         mx_set_color(node->d_name, PINK);
     else
         mx_printstr(node->d_name);
-
     mx_printstr(" -> ");
     readlink(node->path, temp, 256);
     mx_printstr(temp);
-
     return res;
 }
 

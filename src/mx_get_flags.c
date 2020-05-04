@@ -84,9 +84,9 @@ void check_gn_flags(t_flags *opts, char *flags){
 }
 
 t_flags *mx_get_flags(t_flags *flag, char *flags) {
-    if (*++flags == '\0')
+    if (*++flags == '\0') {
         exit(1);
-
+    }
     if (mx_is_valid_flag(flags)) {
         check_output_flags(flag, flags);
         check_info_flag(flag, flags);
@@ -101,6 +101,5 @@ t_flags *mx_get_flags(t_flags *flag, char *flags) {
         mx_printerr("] [file ...]\n");
         exit(1);
     }
-
     return flag;
 }

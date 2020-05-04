@@ -22,16 +22,15 @@ t_dirlist *mx_sort_list_dir(t_dirlist *lst, t_flags *opts) {
 
     if (!lst || !opts)
         return NULL;
-
-    mx_cmp = factory(opts);
+        mx_cmp = factory(opts);
     for (t_dirlist *i = lst; i != NULL; i = i->next) {
         for (t_dirlist *j = i->next; j != NULL; j = j->next) {
-            if (opts->flag_f)
+            if (opts->flag_f){
                 return lst;
+            }
             mx_cmp(i, j, opts);
         }
     }
-
     return lst;
 }
 
