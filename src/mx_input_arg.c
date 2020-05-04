@@ -4,14 +4,17 @@ void mx_check_arg(int argc, char **argv, int i, int *is_error) {
     struct stat sb;
     t_list *bad_list = NULL;
 
-    for(; i < argc; i++) {
+    for (; i < argc; i++) {
         if(lstat(argv[i], &sb) == -1) {
             *is_error = 1;
             mx_push_front(&bad_list, argv[i]);
         }
     }
     bad_list = mx_sort_list(bad_list, mx_cmp);
-    mx_out_no_file(bad_list);
+    if (bad_list) {
+        mx_out_no_file(bad_list);
+        exit(1);
+    }
     mx_del_list(&bad_list);
 }
 

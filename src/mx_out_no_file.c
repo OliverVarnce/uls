@@ -8,5 +8,4 @@ void mx_out_no_file(t_list *lst) {
         mx_printerr("\n");
         lst = lst->next;
     }
-    exit(1);
 }

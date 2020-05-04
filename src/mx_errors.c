@@ -5,6 +5,7 @@ void mx_dir_err(char *path) {
     int i = mx_count_words(path, '/');
 
     mx_printerr(LS_FUNC_NAME);
+    mx_printerr(": ");
     perror(split[i-1]);
     for (int j = 0; j < i; j++) {
         free(split[j]);
