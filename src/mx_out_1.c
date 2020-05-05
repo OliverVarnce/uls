@@ -7,8 +7,8 @@ void mx_out_1(t_dirlist *head, t_flags *opts) {
         opts->flag_G ?
         mx_out_G(w->d_name, w->stattemp->st_mode) :
         mx_printstr(w->d_name);
-        if (opts->flag_F)
-            mx_out_F_1(w->stattemp->st_mode);
+        if (opts->flag_F || opts->flag_p)
+            mx_out_F_1(w->stattemp->st_mode, opts);
         mx_printchar('\n');
     }
 }

@@ -21,7 +21,11 @@ void mx_else_FG (t_flags *opts, t_node **arr, int i, int j) {
     }
     if (opts->flag_F && isatty(STDOUT_FILENO)) {
         mx_out_F(arr[i][j].ptr->d_name,
-                 arr[i][j].ptr->stattemp->st_mode);
+                 arr[i][j].ptr->stattemp->st_mode, opts);
+    }
+    if (opts->flag_p && isatty(STDOUT_FILENO)) {
+        mx_out_F(arr[i][j].ptr->d_name,
+                 arr[i][j].ptr->stattemp->st_mode, opts);
     }
     else {
         mx_printstr(arr[i][j].ptr->d_name);

@@ -1,7 +1,7 @@
 #ifndef ULS_H
 #define ULS_H
 
-#define LS_VALID_FLG "ACFGRSTacfglnrtu1"
+#define LS_VALID_FLG "ACFGRSTacfglnprtu1"
 #define LS_VALID_STR_ONE "uls: illegal option -- "
 #define LS_STATIC_WIN_SIZE 80
 #define LS_FUNC_NAME "uls"
@@ -15,7 +15,6 @@
 #define RED  "\33[31m"
 #define YELLOW  "\33[33m"
 #define PINK  "\33[35m"
-#define AQUA  "\33[36m"
 #define BLUE  "\33[34m"
 #define GREEN "\33[32m"
 #define YELLOW_BLUE  "\33[43m\33[34m"
@@ -60,6 +59,7 @@ typedef struct s_flags {
     bool flag_g;
     bool flag_l;
     bool flag_n;
+    bool flag_p;
     bool flag_r;
     bool flag_t;
     bool flag_u;
@@ -108,7 +108,7 @@ void mx_print_table_FG (t_flags *opts, int col_width,
                         int str_len, int tabs);
 void mx_print_table(t_dirlist *head, t_flags *opts);
 void mx_out_l(t_dirlist *lst, t_flags *fl, bool pr_total);
-void mx_out_F(char *name, mode_t val);
+void mx_out_F(char *name, mode_t val, t_flags *opts);
 void mx_else_FG (t_flags *opts, t_node **arr, int i, int j);
 void mx_set_color(char *name, char *col);
 void mx_out_G(char *name, mode_t val);
@@ -144,7 +144,7 @@ void mx_make_table(t_dirlist *head, t_table_info table, int col_width,
                    t_flags *opts);
 void mx_dirlist_out(t_dirlist *list, t_flags *opts);
 void mx_print_reg(char *name, mode_t val);
-void mx_check_perm(char *name, mode_t val);
-void mx_out_F_1(mode_t val);
-void mx_check_perm_1(mode_t val);
+void mx_check_perm(char *name, mode_t val, t_flags *opts);
+void mx_out_F_1(mode_t val, t_flags *opts);
+void mx_check_perm_1(mode_t val, t_flags *opts);
 #endif

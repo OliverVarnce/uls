@@ -62,6 +62,8 @@ void check_l_mini_flags(t_flags *opts, char *flags) {
             case 'c': opts->flag_c = true;
                 opts->flag_u = false;
                 break;
+            case 'p': opts->flag_p = true;
+                break;
         }
         flags++;
     }
