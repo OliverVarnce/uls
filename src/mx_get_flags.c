@@ -35,8 +35,10 @@ void check_info_flag(t_flags *opts, char *flags) {
                 opts->flag_A = !opts->flag_a ? true : false;
                 break;
             case 'G': opts->flag_G = true;
+                opts->flag_C = false;
                 break;
             case 'R': opts->flag_R = true;
+                opts->flag_C = false;
                 break;
             case 'F': opts->flag_F = true;
                 break;
