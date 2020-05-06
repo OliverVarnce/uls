@@ -23,6 +23,7 @@ void mx_check_perm(char *name, mode_t val, t_flags *opts) {
         || ((val & 0x008) && (val & 0x400)) || ((!(val & 0x008))
         && (val & 0x400)))
         opts->flag_F ? mx_set_sym(name, "*") : mx_set_sym(name, "");
+
     else
         mx_set_sym(name, "");
 }
