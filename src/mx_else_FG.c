@@ -15,15 +15,15 @@ void mx_print_table_FG (t_flags *opts, int col_width,
 }
 
 void mx_else_FG (t_flags *opts, t_node **arr, int i, int j) {
-    if (opts->flag_G) {
+    if (opts->flag_G && isatty(STDOUT_FILENO))
         mx_out_G(arr[i][j].ptr->d_name,
                  arr[i][j].ptr->stattemp->st_mode);
-    }
-    else if (opts->flag_F) {
+    if (opts->flag_F && isatty(STDOUT_FILENO))
         mx_out_F(arr[i][j].ptr->d_name,
-                 arr[i][j].ptr->stattemp->st_mode);
-    }
-    else {
+                 arr[i][j].ptr->stattemp->st_mode, opts);
+    if (opts->flag_p && isatty(STDOUT_FILENO))
+        mx_out_F(arr[i][j].ptr->d_name,
+                 arr[i][j].ptr->stattemp->st_mode, opts);
+    else
         mx_printstr(arr[i][j].ptr->d_name);
-    }
 }

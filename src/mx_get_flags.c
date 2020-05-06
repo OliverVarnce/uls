@@ -35,8 +35,10 @@ void check_info_flag(t_flags *opts, char *flags) {
                 opts->flag_A = !opts->flag_a ? true : false;
                 break;
             case 'G': opts->flag_G = true;
+                opts->flag_C = false;
                 break;
             case 'R': opts->flag_R = true;
+                opts->flag_C = false;
                 break;
             case 'F': opts->flag_F = true;
                 break;
@@ -59,6 +61,8 @@ void check_l_mini_flags(t_flags *opts, char *flags) {
                 break;
             case 'c': opts->flag_c = true;
                 opts->flag_u = false;
+                break;
+            case 'p': opts->flag_p = true;
                 break;
         }
         flags++;
